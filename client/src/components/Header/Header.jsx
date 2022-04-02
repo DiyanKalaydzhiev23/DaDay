@@ -1,6 +1,14 @@
 const Header = () => {
     return (
-        <h1 className="text-lg text-blue">Header</h1>
+        <header>
+            <h1>DaDay</h1>
+            <nav>
+                <ul>
+                    <li><a>Register</a></li>
+                    <li><a>Login</a></li>
+                </ul>
+            </nav>
+        </header>
     );
 }
 

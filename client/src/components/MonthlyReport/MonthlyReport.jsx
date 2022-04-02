@@ -12,7 +12,7 @@ const MonthlyReport = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getReport('1')
+        notesService.getReport('4')
             .then(response => {
                 console.log(response);
                 setNotes(response);
