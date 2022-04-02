@@ -1,0 +1,9 @@
+header,
+footer {
+    background: var(--main-color-2);
+    opacity: 0.8;
+}
+
+main {
+    background: var(--main-color-1);
+}

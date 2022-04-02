@@ -1,6 +1,15 @@
 const Footer = () => {
     return (
-        <h1 className="text-lg text-blue">Footer</h1>
+        <footer className="flex justify-between items-center px-16">
+            <h1 className="text-xl px-5">DaDay</h1>
+
+            <nav>
+                <ul className="flex py-4">
+                    <li className="px-5"><a>Facebook</a></li>
+                    <li className="px-5"><a>LinkedIn</a></li>
+                </ul>
+            </nav>
+        </footer>
     );
 }
 

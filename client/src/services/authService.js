@@ -21,8 +21,7 @@ const register = async (data) => {
     });
 
     const responseData = await response.json();
-    localStorage.setItem('username', data.username);
-    localStorage.setItem('token', responseData.token);
+    localStorage.setItem('user', JSON.stringify({ username: data.username, token: responseData.token }));
 
     if (!response.ok) {
         throw new Error(responseData);
@@ -32,7 +31,7 @@ const register = async (data) => {
 }
 
 const login = async (data) => {
-    const response = await fetch(`${baseUrl}/api-auth/`, {
+    const response = await fetch(`${baseUrl}/auth/login/`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -40,12 +39,13 @@ const login = async (data) => {
         }
     });
 
-    const responseData = await data.json();
+    const responseData = await response.json();
 
     if (!response.ok) {
         throw new Error(responseData);
     }
 
+    localStorage.setItem('user', JSON.stringify(responseData));
     return responseData;
 }
 
