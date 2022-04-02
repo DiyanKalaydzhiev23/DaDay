@@ -1,7 +1,6 @@
-from django.contrib.auth import get_user_model
-from rest_framework import permissions, generics, status
+from django.contrib.auth import get_user_model, authenticate, login
+from rest_framework import permissions, generics, status, views
 from rest_framework.response import Response
-
 from server.auth_app.serializers import UserSerializer
 from rest_framework.authtoken.models import Token
 
@@ -22,3 +21,34 @@ class UserCreate(generics.CreateAPIView):
         token, created = Token.objects.get_or_create(user=serializer.instance)
         return Response({'token': token.key}, status=status.HTTP_201_CREATED, headers=headers)
 
+
+class LoginUserView(views.APIView):
+    queryset = UserModel.objects.all()
+    # serializer_class = UserSerializer
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        if not username or not password:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        check_user = UserModel.objects.filter(username=username)
+        if not check_user:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            token, created = Token.objects.get_or_create(user=request.user)
+
+            data = {
+                'token': token.key,
+                'user_id': request.user.pk,
+                'username': request.user.username
+            }
+
+            return Response(data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(status.HTTP_400_BAD_REQUEST)
