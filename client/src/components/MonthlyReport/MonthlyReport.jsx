@@ -27,8 +27,8 @@ const MonthlyReport = () => {
         <>  
             {isLoading && <p>Loading...</p>}
             {!isLoading && 
-                <section>
-                    <h1>Monthly report</h1>
+                <section className="flex flex-col items-center pb-10">
+                    <h1 className="title mb-20">Monthly report</h1>
 
                     <ReportChart emotions={emotions}></ReportChart>
                 </section>
