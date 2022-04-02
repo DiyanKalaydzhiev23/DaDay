@@ -15,4 +15,21 @@ const getReport = async (userId) => {
     return data;
 }
 
-export const notesService = { getReport };
+const getOne = async (user) => {
+    const response = await fetch(`${baseUrl}/share-day/${user.user_id}`, {
+
+        headers: { 
+            'Authorization': user.token,
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data);
+    }
+
+    return data;
+}
+
+export const notesService = { getReport, getOne };

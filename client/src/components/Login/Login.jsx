@@ -5,11 +5,12 @@ import { authService } from "../../services/authService";
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onSubmit', reValidateMode: 'onChange' });
+    const navigate = useNavigate();
 
     const loginUser = (data) => {
         authService.login(data)
-            .then(response => {
-                console.log(response);
+            .then(() => {
+                navigate('/');
             })
             .catch(err => {
                 console.log(err);
