@@ -1,10 +1,22 @@
+from datetime import datetime
 import schedule
 import time
+from server.auth_app.models import Profile
+from server.common.helpers import my_mail
 
 
-schedule.every().day.at("19:00").do()
+def collect_emails():
+    profiles = Profile.objects.all()
+
+    for profile in profiles:
+        my_mail(None, profile.parent_email)
+        profile.last_sent_email = datetime.now()
 
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+schedule.every().day.at("00:56").do(collect_emails)
+
+
+def start_scheduler(request):
+    while True:
+        schedule.run_pending()
+        time.sleep(1)

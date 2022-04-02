@@ -17,9 +17,6 @@ class NotesListView(views.APIView):
     def get(self, request, pk):
         queryset = Note.objects.filter(user=pk)
         serializer = NoteSerializer(queryset, many=True)
-        permission_classes = (
-            permissions.AllowAny,
-        )
 
         return Response(data=serializer.data)
 
