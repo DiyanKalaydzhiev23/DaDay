@@ -17,9 +17,7 @@ const getReport = async (userId) => {
 
 const getOne = async (user) => {
     const response = await fetch(`${baseUrl}/share-day/${user.user_id}`, {
-
         headers: { 
-            'Authorization': user.token,
             'Content-Type': 'application/json'
         }
     });
