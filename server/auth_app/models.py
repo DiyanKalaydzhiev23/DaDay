@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.contrib.auth import models as auth_models
@@ -33,6 +35,10 @@ class Profile(models.Model):
             MinValueValidator(1),
             MaxValueValidator(5),
         ]
+    )
+
+    last_sent_email = models.DateTimeField(
+        default=datetime.now()
     )
 
     user = models.OneToOneField(

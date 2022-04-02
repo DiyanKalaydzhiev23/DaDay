@@ -12,3 +12,5 @@ def send_mail(text='Email_body', subject='Hello word', from_email='', to_emails=
     server.login(username, password)
     server.sendmail(from_email, to_emails, 'Hi kids!')
     server.quit()
+
+
