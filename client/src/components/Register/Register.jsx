@@ -8,10 +8,8 @@ const Register = () => {
     
     const registerUser = (data) => {
         authService.register(data)
-            .then(response => {
-                if (response.profile) {
-                    navigate('/');
-                }
+            .then(() => {
+                navigate('/');
             })
             .catch(err => {
                 console.log(err);

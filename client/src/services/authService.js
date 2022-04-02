@@ -5,6 +5,7 @@ const register = async (data) => {
         throw new Error('Passwords must match!');
     }
 
+
     const reqBody = { 
         username: data.username, 
         password: data.password, 
@@ -20,6 +21,8 @@ const register = async (data) => {
     });
 
     const responseData = await response.json();
+    localStorage.setItem('username', data.username);
+    localStorage.setItem('token', responseData.token);
 
     if (!response.ok) {
         throw new Error(responseData);
@@ -29,7 +32,7 @@ const register = async (data) => {
 }
 
 const login = async (data) => {
-    const response = await fetch(`${baseUrl}/api-auth`, {
+    const response = await fetch(`${baseUrl}/api-auth/`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
