@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 const Header = () => {
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    console.log(user);
+
     return (
         <header className="flex justify-between items-center px-16">
             <h1 className="text-xl px-5">DaDay</h1>

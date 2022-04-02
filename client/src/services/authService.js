@@ -21,7 +21,7 @@ const register = async (data) => {
     });
 
     const responseData = await response.json();
-    localStorage.setItem('user', { username: data.username, token: responseData.token });
+    localStorage.setItem('user', JSON.stringify({ username: data.username, token: responseData.token }));
 
     if (!response.ok) {
         throw new Error(responseData);
@@ -45,7 +45,7 @@ const login = async (data) => {
         throw new Error(responseData);
     }
 
-    localStorage.setItem('user', data);
+    localStorage.setItem('user', JSON.stringify(responseData));
     return responseData;
 }
 

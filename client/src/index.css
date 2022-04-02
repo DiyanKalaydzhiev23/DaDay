@@ -10,7 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --main-color-1: #e6c4a8;
-  --main-color-2: #cb7b44;
+  --main-color-2: #885a3a;
   --main-color-3: #3f1d1c;
 }
 
@@ -39,5 +39,5 @@ input[type="submit"] {
 }
 
 main {
-  min-height: 88.77vh;
+  min-height: 88.78vh;
 }
