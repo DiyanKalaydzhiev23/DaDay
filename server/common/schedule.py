@@ -13,7 +13,7 @@ def collect_emails():
         profile.last_sent_email = datetime.now()
 
 
-schedule.every().day.at("00:56").do(collect_emails)
+schedule.every().day.at("19:00").do(collect_emails)
 
 
 def start_scheduler(request):
