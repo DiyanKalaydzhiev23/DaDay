@@ -23,9 +23,10 @@ class NotesListView(views.APIView):
 class NoteCreateView(views.APIView):
     queryset = Question.objects.all()
     permission_classes = (
-        permissions.IsAuthenticated,
+        permissions.AllowAny,
     )
 
     def get(self, request, pk):
         question = random.choice(self.queryset.all()).__str__()
+        print(request.headers)
         return Response({'question': question}, status=status.HTTP_200_OK)
