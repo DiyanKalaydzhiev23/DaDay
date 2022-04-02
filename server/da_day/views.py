@@ -17,12 +17,11 @@ class NotesListView(views.APIView):
     def get(self, request, pk):
         queryset = Note.objects.filter(user=pk)
         serializer = NoteSerializer(queryset, many=True)
-        emotions = {}
+        permission_classes = (
+            permissions.AllowAny,
+        )
 
-        for n in serializer.data:
-            emotions[n.id] = n.emotion
-
-        return Response(data=emotions)
+        return Response(data=serializer.data)
 
 
 class NoteCreateView(views.APIView):
