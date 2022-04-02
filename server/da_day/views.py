@@ -30,7 +30,7 @@ class NoteCreateView(views.APIView):
     def get(self, request, pk):
         question = random.choice(self.queryset.all()).__str__()
 
-         if request.headers.get('Authorization') in Token.objects.get_or_create():
-             return Response({'question': question}, status=status.HTTP_200_OK)
+        if request.headers.get('Authorization') in Token.objects.get_or_create():
+            return Response({'question': question}, status=status.HTTP_200_OK)
 
-         return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_404_NOT_FOUND)
