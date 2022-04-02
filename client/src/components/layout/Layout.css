@@ -1,11 +1,12 @@
 header,
 footer {
-    /* background: var(--main-color-2); */
+    background: #c47a78;
     opacity: 0.8;
 }
 
 main {
-    background: var(--main-color-1);
+    /* background: #f2e9de; */
+    background: #e0b89d;
 }
 
 .nav-link {

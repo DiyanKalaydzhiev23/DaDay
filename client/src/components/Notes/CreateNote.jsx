@@ -63,7 +63,7 @@ const CreateNote = () => {
                     <h1 className="text-8xl my-10 text-center">Why do you feel this way?</h1>
                     
                     <form onSubmit={handleSubmit(sendAnswer)} className="flex flex-col">
-                        <input {...register('description', { required: { value: true } })} name="description" type="text" className="form-input" />
+                        <textarea {...register('description', { required: { value: true } })} name="description" type="text" className="desc mt-20 bg-transparent border-2 border-orange-200" />
                         <input type="submit" value="Send Answer" />
                     </form>
                 </article>

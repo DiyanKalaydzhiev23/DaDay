@@ -11,7 +11,7 @@ const Header = () => {
     }
 
     return (
-        <header className="flex justify-between items-center px-16 bg-amber-900 text-2xl">
+        <header className="flex justify-between items-center px-16 text-2xl">
             <h1 className="text-xl px-5">DaDay</h1>
 
             <nav>

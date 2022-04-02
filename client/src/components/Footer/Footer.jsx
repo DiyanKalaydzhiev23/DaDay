@@ -1,6 +1,6 @@
 const Footer = () => {
     return (
-        <footer className="flex justify-between items-center px-16 bg-amber-900 text-2xl">
+        <footer className="flex justify-between items-center px-16 text-2xl">
             <h1 className="text-xl px-5">DaDay</h1>
 
             <nav>
