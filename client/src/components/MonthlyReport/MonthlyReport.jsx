@@ -3,29 +3,30 @@ import { useEffect } from 'react';
 import { notesService } from '../../services/notesService';
 
 const MonthlyReport = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const userId = user.id;
+    // const user = JSON.parse(localStorage.getItem('user'));
+    // const userId = user.id;
 
     const [notes, setNotes] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(async () => {
+    useEffect(() => {
         setIsLoading(true);
 
-        try {
-            const response = await notesService.getReport(userId);
+        notesService.getReport('2')
+            .then(response => {
+                console.log(response);
+                setNotes(response);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
+            })
             // [
             //     { id: 1, desc: 'I felt sad', emotion: 2, date: '2022-02-10' },
             //     { id: 2, desc: 'I felt happy', emotion: 5, date: '2022-01-23' }
             // ]
-            console.log(response);
-            setNotes(response);
 
-            setIsLoading(false);
-        } catch (err) {
-            console.log(err);
-        }
-    }, [userId]);
+    }, []);
 
     return (
         <>  
@@ -46,3 +47,5 @@ const MonthlyReport = () => {
     )
 
 }
+
+export default MonthlyReport;
