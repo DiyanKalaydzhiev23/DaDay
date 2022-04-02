@@ -22,3 +22,10 @@ class Note(models.Model):
         UserModel,
         on_delete=models.CASCADE,
     )
+
+
+class Question(models.Model):
+    question = models.TextField()
+
+    def __str__(self):
+        return f"{self.question}"

@@ -1,7 +1,8 @@
+import random
 from django.contrib.auth import get_user_model
-from rest_framework import views, permissions
+from rest_framework import views, permissions, status
 from rest_framework.response import Response
-from server.da_day.models import Note
+from server.da_day.models import Note, Question
 from server.da_day.serializers import NoteSerializer
 
 
@@ -17,3 +18,14 @@ class NotesListView(views.APIView):
         )
 
         return Response(data=serializer.data)
+
+
+class NoteCreateView(views.APIView):
+    queryset = Question.objects.all()
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )
+
+    def get(self, request, pk):
+        question = random.choice(self.queryset.all()).__str__()
+        return Response({'question': question}, status=status.HTTP_200_OK)

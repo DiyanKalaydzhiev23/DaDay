@@ -24,7 +24,6 @@ class UserCreate(generics.CreateAPIView):
 
 class LoginUserView(views.APIView):
     queryset = UserModel.objects.all()
-    # serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
