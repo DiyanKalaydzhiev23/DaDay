@@ -21,7 +21,7 @@ code {
 }
 
 .title {
-  color: blue;
+  margin-top: 3em;
   font-weight: bold;
   font-size: 2.5rem;
 }
@@ -40,5 +40,5 @@ code {
 }
 
 main {
-  min-height: 87.2vh;
+  min-height: 85.60vh;
 }

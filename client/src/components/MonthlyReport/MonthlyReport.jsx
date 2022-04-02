@@ -1,32 +1,27 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { notesService } from '../../services/notesService';
+import ReportChart from './ReportChart';
 
 const MonthlyReport = () => {
-    // const user = JSON.parse(localStorage.getItem('user'));
-    // const userId = user.id;
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
-    const [notes, setNotes] = useState([]);
+    const [emotions, setEmotions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getReport('4')
+        notesService.getReport(user.user_id)
             .then(response => {
                 console.log(response);
-                setNotes(response);
+                setEmotions(response);
                 setIsLoading(false);
             })
             .catch(err => {
                 console.log(err);
             })
-            // [
-            //     { id: 1, desc: 'I felt sad', emotion: 2, date: '2022-02-10' },
-            //     { id: 2, desc: 'I felt happy', emotion: 5, date: '2022-01-23' }
-            // ]
-
-    }, []);
+    }, [user.user_id]);
 
     return (
         <>  
@@ -35,14 +30,7 @@ const MonthlyReport = () => {
                 <section>
                     <h1>Monthly report</h1>
 
-                    <article>
-                        {notes.map((note, i) => 
-                            <section key={i}>
-                                <p>{note.description}</p>    
-                                <p>{note.emoji}</p>
-                            </section>
-                        )}
-                    </article>
+                    <ReportChart emotions={emotions}></ReportChart>
                 </section>
             }   
         
