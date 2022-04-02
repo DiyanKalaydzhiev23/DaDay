@@ -45,4 +45,10 @@ class NoteCreateView(views.APIView):
 
         note.save()
 
+        all_notes = Note.objects.filter(user_id=pk)
+
+        if len(all_notes) >= 60:
+            first_note = list(all_notes).pop(0)
+            first_note.delete()
+
         return Response(status=status.HTTP_200_OK)
