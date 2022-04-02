@@ -117,6 +117,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
+CORS_ALLOW_HEADERS = (
+    'content-disposition', 'accept-encoding',
+    'content-type', 'accept', 'origin', 'authorization',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
