@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
-import Home from './components/Home/Home';
+import CreateNote from './components/Notes/CreateNote';
 import Layout from './components/layout/Layout';
 import Login from './components/Login/Login';
 import MonthlyReport from './components/MonthlyReport/MonthlyReport';
@@ -14,7 +14,7 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />}/>
+        <Route path="/" element={user ? <CreateNote /> : <Navigate to="/login" />}/>
         <Route path="/monthly-report" element={<MonthlyReport />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
