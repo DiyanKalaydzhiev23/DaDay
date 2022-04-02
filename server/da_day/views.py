@@ -24,7 +24,7 @@ class NotesListView(views.APIView):
 class NoteCreateView(views.APIView):
     queryset = Question.objects.all()
     permission_classes = (
-        permissions.IsAuthenticated,
+        permissions.AllowAny,
     )
 
     def get(self, request, pk):
