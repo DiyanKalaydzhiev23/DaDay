@@ -24,13 +24,9 @@ class NotesListView(views.APIView):
 class NoteCreateView(views.APIView):
     queryset = Question.objects.all()
     permission_classes = (
-        permissions.AllowAny,
+        permissions.IsAuthenticated,
     )
 
     def get(self, request, pk):
         question = random.choice(self.queryset.all()).__str__()
-        print(request.headers.get('Authorization'), Token.objects.get_or_create(user=request.user)[0])
-        # if request.headers.get('Authorization') == Token.objects.get_or_create(user=request.user.id)[0]:
-        #     return Response({'question': question}, status=status.HTTP_200_OK)
-        #
-        # return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response({'question': question}, status=status.HTTP_200_OK)
