@@ -4,7 +4,7 @@ const register = async (data) => {
     if (data.password != data.repeatPassword) {
         throw new Error('Passwords must match!');
     }
-    
+
     const reqBody = { 
         username: data.username, 
         password: data.password, 
@@ -28,4 +28,22 @@ const register = async (data) => {
     return responseData;
 }
 
-export const authService = { register };
+const login = async (data) => {
+    const response = await fetch(`${baseUrl}/api-auth`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const responseData = await data.json();
+
+    if (!response.ok) {
+        throw new Error(responseData);
+    }
+
+    return responseData;
+}
+
+export const authService = { register, login };

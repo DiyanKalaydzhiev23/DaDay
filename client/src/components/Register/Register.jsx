@@ -2,8 +2,6 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { authService } from '../../services/authService';
 
-import './Register.css';
-
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onSubmit', reValidateMode: 'onChange' });
     const navigate = useNavigate();
