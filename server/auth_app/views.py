@@ -3,6 +3,7 @@ from rest_framework import permissions, generics, status, views
 from rest_framework.response import Response
 from server.auth_app.serializers import UserSerializer
 from rest_framework.authtoken.models import Token
+from django.core.mail import send_mail
 
 
 UserModel = get_user_model()
@@ -19,6 +20,15 @@ class UserCreate(generics.CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         token, created = Token.objects.get_or_create(user=serializer.instance)
+
+        send_mail(
+            'Thanks for your registration',
+            'We at DaDay are very thankful that you chose our help.',
+            'allowcookies2022@gmail.com',
+            [request.POST['profile.parent_email']],
+            fail_silently=False,
+        )
+
         return Response({'token': token.key}, status=status.HTTP_201_CREATED, headers=headers)
 
 

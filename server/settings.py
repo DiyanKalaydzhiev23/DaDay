@@ -138,8 +138,8 @@ USE_TZ = True
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'youremail@gmail.com'
-EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_HOST_USER = 'allowcookies2022@gmail.com'
+EMAIL_HOST_PASSWORD = 'ACookies'
 EMAIL_PORT = 587
 
 # Static files (CSS, JavaScript, Images)

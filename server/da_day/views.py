@@ -2,6 +2,8 @@ import random
 from django.contrib.auth import get_user_model
 from rest_framework import views, permissions, status
 from rest_framework.response import Response
+
+from server.auth_app.models import Profile
 from server.da_day.models import Note, Question
 from server.da_day.serializers import NoteSerializer
 
@@ -31,13 +33,15 @@ class NoteCreateView(views.APIView):
         return Response({'question': question}, status=status.HTTP_200_OK)
 
     def post(self, request, pk):
-        text = request.POST.get('text')
-        avatar = request.POST.get('avatar')
+        text = request.data.get('text')
+        avatar = request.data.get('avatar')
+
+        user = UserModel.objects.get(id=pk)
 
         note = Note(
             description=text,
-            avatar=avatar,
-            user=request.user,
+            emotion=avatar,
+            user=user,
         )
 
         note.save()
