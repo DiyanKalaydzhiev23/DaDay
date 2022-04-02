@@ -17,8 +17,12 @@ class NotesListView(views.APIView):
     def get(self, request, pk):
         queryset = Note.objects.filter(user=pk)
         serializer = NoteSerializer(queryset, many=True)
+        emotions = {}
 
-        return Response(data=serializer.data)
+        for n in serializer.data:
+            emotions[n.id] = n.emotion
+
+        return Response(data=emotions)
 
 
 class NoteCreateView(views.APIView):
