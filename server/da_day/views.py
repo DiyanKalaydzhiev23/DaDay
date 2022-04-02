@@ -29,7 +29,7 @@ class NoteCreateView(views.APIView):
 
     def get(self, request, pk):
         question = random.choice(self.queryset.all()).__str__()
-
+        print(request.headers.get('Authorization'), Token.objects.get_or_create(user=request.user.id)[0])
         if request.headers.get('Authorization') == Token.objects.get_or_create(user=request.user.id)[0]:
             return Response({'question': question}, status=status.HTTP_200_OK)
 
