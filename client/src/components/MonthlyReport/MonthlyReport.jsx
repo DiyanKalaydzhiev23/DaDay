@@ -12,7 +12,7 @@ const MonthlyReport = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getReport('2')
+        notesService.getReport('1')
             .then(response => {
                 console.log(response);
                 setNotes(response);
@@ -36,8 +36,11 @@ const MonthlyReport = () => {
                     <h1>Monthly report</h1>
 
                     <article>
-                        {notes.map(note => 
-                            <p>{note.description}</p>    
+                        {notes.map((note, i) => 
+                            <section key={i}>
+                                <p>{note.description}</p>    
+                                <p>{note.emoji}</p>
+                            </section>
                         )}
                     </article>
                 </section>
