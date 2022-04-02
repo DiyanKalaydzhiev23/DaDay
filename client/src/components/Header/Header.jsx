@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
     return (
-        <header>
-            <h1>DaDay</h1>
+        <header className="flex justify-between items-center px-16">
+            <h1 className="text-xl px-5">DaDay</h1>
+
             <nav>
-                <ul>
-                    <li><a>Register</a></li>
-                    <li><a>Login</a></li>
+                <ul className="flex py-4">
+                    <li className="px-5"><Link to='/register'>Register</Link></li>
+                    <li className="px-5"><Link to='/login'>Login</Link></li>
                 </ul>
             </nav>
         </header>

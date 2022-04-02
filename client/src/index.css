@@ -9,6 +9,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --main-color-1: #e6c4a8;
+  --main-color-2: #cb7b44;
+  --main-color-3: #3f1d1c;
 }
 
 code {
@@ -33,4 +36,8 @@ input[type="submit"] {
   width: 300px;
   height: 30px;
   border: black 1px solid;
+}
+
+main {
+  min-height: 88.77vh;
 }
