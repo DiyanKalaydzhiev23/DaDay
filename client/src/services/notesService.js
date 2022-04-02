@@ -8,10 +8,6 @@ const getReport = async (userId) => {
         throw new Error(data);
     }
 
-    // [
-    //     { id: 1, desc: 'I felt sad', emotion: 2, date: '2022-02-10' },
-    //     { id: 2, desc: 'I felt happy', emotion: 5, date: '2022-01-23' }
-    // ]
     return data;
 }
 
@@ -30,4 +26,20 @@ const getOne = async (user) => {
     return data;
 }
 
-export const notesService = { getReport, getOne };
+const createOne = async (user, data) => {
+    const response = await fetch(`${baseUrl}/share-day/${user.user_id}`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(data);
+    }
+
+    return { status: 'success' };
+}
+
+export const notesService = { getReport, getOne, createOne };

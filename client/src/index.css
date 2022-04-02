@@ -31,11 +31,12 @@ code {
   margin: 1em 0;
 }
 
-.form-input,
-input[type="submit"] {
-  width: 300px;
-  height: 30px;
-  border: black 1px solid;
+.form-input {
+  margin-top: 5em;
+  width: 800px;
+  height: 50px;
+  background: transparent;
+  border-bottom: black 3px solid;
 }
 
 main {
