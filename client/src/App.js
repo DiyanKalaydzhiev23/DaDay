@@ -10,7 +10,7 @@ import Register from './components/Register/Register';
 
 function App() {
   const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-
+  
   return (
     <Layout>
       <Routes>

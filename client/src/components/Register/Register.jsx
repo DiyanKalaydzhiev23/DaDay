@@ -40,7 +40,7 @@ const Register = () => {
                 </article>
                 
                 <article className="input-group">
-                    <label htmlFor="confirm-password">Password</label>
+                    <label htmlFor="confirm-password">Confirm Password</label>
                     <input type="password" name="confirmPassword" id="confirm-password" {...register('repeatPassword', { required: {value: true, message: 'Repeat password is required!'}})}  className="form-input"/>
                     {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
                 </article>
