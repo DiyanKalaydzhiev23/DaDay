@@ -21,12 +21,6 @@ const Register = () => {
             });
     }
 
-    const changeSrcToGif = (event) => {
-        event.target.setAttribute('src', 'https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif');
-    }
-
-    const changeSrcToPng = (event) => event.target.setAttribute('src', '');
-
     return (
         <section className="flex flex-col items-center">
             <h1 className="title">Register</h1>
@@ -57,14 +51,14 @@ const Register = () => {
                 </article>
 
                 <article className="input-group">
-                    <label htmlFor="avatar">Avatar</label>
-                    <section className="flex">
+                    <label htmlFor="avatar">Choose your Avatar</label>
+                    <section className="flex mt-5">
                         <article className="flex flex-col items-center">
-                            <img src="https://res.cloudinary.com/drinka/image/upload/v1648973958/da-day/cat/cat-main_zs3bru.png" alt="Cat" onMouseOver={(e) => changeSrcToGif(e)} onMouseLeave={(e) => changeSrcToPng(e)} onClick={() => setAvatar(1)} className="avatar"/>
+                            <img src="https://res.cloudinary.com/drinka/image/upload/v1648977221/da-day/cat/cat-main_jmglcl.png" alt="Cat"  onClick={() => setAvatar(1)} className="avatar"/>
                         </article>
 
                         <article className="flex flex-col items-center">
-                            <img src="https://res.cloudinary.com/drinka/image/upload/v1648973984/da-day/duck/duck-main_nz3pab.png" alt="Duck" onMouseOver={(e) => changeSrcToGif(e)} onMouseLeave={(e) => changeSrcToPng(e)} onClick={() => setAvatar(2)} className="avatar"/>
+                            <img src="https://res.cloudinary.com/drinka/image/upload/v1648973984/da-day/duck/duck-main_nz3pab.png" alt="Duck" onClick={() => setAvatar(2)} className="avatar"/>
                         </article>
                     </section>
                 </article>
