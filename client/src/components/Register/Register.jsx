@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { authService } from '../../services/authService';
 
+import './Register.css';
+
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onSubmit', reValidateMode: 'onChange' });
     const navigate = useNavigate();
+
+    const [avatar, setAvatar] = useState(null);
     
     const registerUser = (data) => {
-        authService.register(data)
+        authService.register(data, avatar)
             .then(() => {
                 navigate('/');
             })
@@ -15,6 +20,12 @@ const Register = () => {
                 console.log(err);
             });
     }
+
+    const changeSrcToGif = (event) => {
+        event.target.setAttribute('src', 'https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif');
+    }
+
+    const changeSrcToPng = (event) => event.target.setAttribute('src', '');
 
     return (
         <section className="flex flex-col items-center">
@@ -47,8 +58,15 @@ const Register = () => {
 
                 <article className="input-group">
                     <label htmlFor="avatar">Avatar</label>
-                    <input {...register('avatar', { required: {value: true, message: 'Avatar is required!'}})} type="number" name="avatar" id="avatar"  className="form-input"/>
-                    {errors.avatar && <p>{errors.avatar.message}</p>}
+                    <section className="flex">
+                        <article className="flex flex-col items-center">
+                            <img src="https://res.cloudinary.com/drinka/image/upload/v1648973958/da-day/cat/cat-main_zs3bru.png" alt="Cat" onMouseOver={(e) => changeSrcToGif(e)} onMouseLeave={(e) => changeSrcToPng(e)} onClick={() => setAvatar(1)} className="avatar"/>
+                        </article>
+
+                        <article className="flex flex-col items-center">
+                            <img src="https://res.cloudinary.com/drinka/image/upload/v1648973984/da-day/duck/duck-main_nz3pab.png" alt="Duck" onMouseOver={(e) => changeSrcToGif(e)} onMouseLeave={(e) => changeSrcToPng(e)} onClick={() => setAvatar(2)} className="avatar"/>
+                        </article>
+                    </section>
                 </article>
 
                 <article className="input-group">
