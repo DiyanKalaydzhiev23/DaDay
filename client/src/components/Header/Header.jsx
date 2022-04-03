@@ -24,6 +24,7 @@ const Header = () => {
 
                 {user && 
                     <ul className="flex py-4">
+                        <li className="px-5 nav-link"><Link to={`/notes/${user.user_id}`}>Notes</Link></li>
                         <li className="px-5 nav-link" onClick={logout}>Log out</li>
                     </ul>
                 }

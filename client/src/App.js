@@ -7,6 +7,7 @@ import Layout from './components/layout/Layout';
 import Login from './components/Login/Login';
 import WeeklyReport from './components/WeeklyReport/WeeklyReport';
 import Register from './components/Register/Register';
+import AllNotes from './components/Notes/AllNotes/AllNotes';
 
 function App() {
   const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
@@ -15,6 +16,8 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={user ? <CreateNote /> : <Navigate to="/login" />}/>
+        <Route path="/notes/:userId" element={<AllNotes />}/>
+        <Route path="/notes/:userId/:noteId" element={<AllNotes />}/>
         <Route path="/weekly-report/:userId" element={<WeeklyReport />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
