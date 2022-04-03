@@ -9,7 +9,7 @@
 }
 
 .desc {
-    width: 60vw;
+    width: 50vw;
     height: 20vh;
 }
 
@@ -17,7 +17,8 @@
     min-width: 40vw;
 }
 
-.emotions {
+.emotions,
+.answer {
     max-width: 60vw;
 }
 
