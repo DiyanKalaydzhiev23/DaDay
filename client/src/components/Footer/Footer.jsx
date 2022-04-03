@@ -4,9 +4,9 @@ const Footer = () => {
             <h1 className="text-xl px-5">DaDay</h1>
 
             <nav>
-                <ul className="flex py-4">
-                    <li className="px-5 nav-link"><a>Facebook</a></li>
-                    <li className="px-5 nav-link"><a>LinkedIn</a></li>
+                <ul className="flex py-4 ">
+                    <li className="px-5 nav-link"><a>&copy; AllowCookies</a></li>
+                    <li className="px-5 nav-link"><a></a></li>
                 </ul>
             </nav>
         </footer>
