@@ -12,6 +12,7 @@ const CreateNote = () => {
     const [emotion, setEmotion] = useState(null);
 
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    console.log(user);
     const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onSubmit', reValidateMode: 'onChange' });
 
     const navigate = useNavigate();
@@ -29,7 +30,8 @@ const CreateNote = () => {
 
         notesService.getOne(user)
             .then(response => {
-                setQuestion(response.question);
+                const question = response.question.replace(/<.+>/, user.username);
+                setQuestion(question);
                 setIsLoading(false);
             })
     }, [user.user_id]);
@@ -50,23 +52,35 @@ const CreateNote = () => {
         <section className="flex flex-col items-center justify-center">
             {isLoading && <p>Loading ...</p>}
             {!isLoading && !emotion &&
-                <article className="flex flex-col items-center mt-28">
-                    <h1 className="text-8xl my-10 text-center">{question}</h1>
-                    <section className="flex mt-10">
-                    {Object.entries(emotions).map((kvp, i) => <img key={i} onClick={() => setEmotion(kvp[1])} src={kvp[0]} className="emotion-card w-36 h-36 mx-5 rounded-3xl"/>)}
-                    </section>
-                </article>
+                <section className="flex px-10">
+                    <article className="animated-img mt-32">
+                        <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
+                    </article>
+
+                    <article className="emotions flex flex-col items-center mt-28">
+                        <h1 className="text-5xl my-10 text-center">{question}</h1>
+                        <section className="flex mt-10">
+                            {Object.entries(emotions).map((kvp, i) => <img key={i} onClick={() => setEmotion(kvp[1])} src={kvp[0]} className="emotion-card w-36 h-36 mx-5 rounded-3xl"/>)}
+                        </section>
+                    </article>
+                </section>
             }
 
             {!isLoading && emotion &&
-                <article className="flex flex-col items-center mt-28">
-                    <h1 className="text-8xl my-10 text-center">Why do you feel this way?</h1>
-                    
-                    <form onSubmit={handleSubmit(sendAnswer)} className="flex flex-col">
-                        <textarea {...register('description', { required: { value: true } })} name="description" type="text" className="desc mt-20 bg-transparent border-2 border-orange-200" />
-                        <input type="submit" value="Send Answer" />
-                    </form>
-                </article>
+                <section className="flex px-10">
+                    <article className="animated-img mt-32">
+                        <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
+                    </article>
+
+                    <article className="flex flex-col items-center mt-28">
+                        <h1 className="text-5xl my-10 text-center">Why do you feel this way?</h1>
+                        
+                        <form onSubmit={handleSubmit(sendAnswer)} className="flex flex-col">
+                            <textarea {...register('description', { required: { value: true } })} name="description" type="text" className="desc mt-20 bg-transparent border-2 border-orange-200" />
+                            <input type="submit" value="Send Answer" />
+                        </form>
+                    </article>
+                </section>
             }
         </section>
     );

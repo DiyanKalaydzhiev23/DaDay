@@ -29,7 +29,8 @@ code {
 .input-group {
   display: flex;
   flex-direction: column;
-  margin: 1em 0;
+  align-items: center;
+  margin: 2em 0;
 }
 
 .form-input {
@@ -37,6 +38,18 @@ code {
   height: 50px;
   background: transparent;
   border-bottom: black 3px solid;
+}
+
+.form-input:focus {
+  outline: none;
+}
+
+input[type="submit"] {
+  width: 10vw;
+  background: #c47a78;
+  border-radius: 20px;
+  padding: 10px 5px;
+  margin-top: 2em;
 }
 
 main {

@@ -5,7 +5,6 @@ const register = async (data) => {
         throw new Error('Passwords must match!');
     }
 
-
     const reqBody = { 
         username: data.username, 
         password: data.password, 
@@ -21,13 +20,13 @@ const register = async (data) => {
     });
 
     const responseData = await response.json();
-    localStorage.setItem('user', JSON.stringify({ username: data.username, token: responseData.token }));
+    // localStorage.setItem('user', JSON.stringify({ username: data.username, token: responseData.token }));
 
     if (!response.ok) {
         throw new Error(responseData);
     }
 
-    return responseData;
+    login({ username: data.username, password: data.password });
 }
 
 const login = async (data) => {

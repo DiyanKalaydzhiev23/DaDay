@@ -1,8 +1,27 @@
 .emotion-card {
     box-shadow: 7px 4px 22px 12px rgba(0,0,0,0.38);
+    transition: 1s;
+}
+
+.emotion-card:hover {
+    width: 160px;
+    height: 160px;
 }
 
 .desc {
     width: 60vw;
     height: 20vh;
+}
+
+.animated-img {
+    min-width: 40vw;
+}
+
+.emotions {
+    max-width: 60vw;
+}
+
+.animated-cat {
+    width: 800px;
+    height: 800px;
 }

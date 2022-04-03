@@ -11,7 +11,7 @@ const Header = () => {
     }
 
     return (
-        <header className="flex justify-between items-center px-16 text-2xl">
+        <header className="flex justify-between items-center pr-16 text-2xl">
             <Link to={user ? "/" : "/login"}><img src="https://res.cloudinary.com/drinka/image/upload/v1648939195/da-day/logo_jh3ae7.png" alt="DaDay logo" className="w-20 h-20" /></Link>
 
             <nav>
