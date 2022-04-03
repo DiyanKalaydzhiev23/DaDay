@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 import CreateNote from './components/Notes/CreateNote';
 import Layout from './components/layout/Layout';
 import Login from './components/Login/Login';
-import MonthlyReport from './components/MonthlyReport/MonthlyReport';
+import WeeklyReport from './components/WeeklyReport/WeeklyReport';
 import Register from './components/Register/Register';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={user ? <CreateNote /> : <Navigate to="/login" />}/>
-        <Route path="/weekly-report" element={<MonthlyReport />} />
+        <Route path="/weekly-report/:userId" element={<WeeklyReport />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>

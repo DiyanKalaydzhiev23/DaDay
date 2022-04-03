@@ -10,7 +10,10 @@
 
 .desc {
     width: 50vw;
-    height: 20vh;
+    height: 32vh;
+    border-radius: 20px;
+    padding: 10px;
+    resize: none;
 }
 
 .animated-img {
