@@ -5,7 +5,7 @@ from server.auth_app.models import Profile
 from server.common.helpers import my_mail
 
 
-def collect_emails():
+def send_emails():
     profiles = Profile.objects.all()
 
     for profile in profiles:
@@ -13,7 +13,7 @@ def collect_emails():
         profile.last_sent_email = datetime.now()
 
 
-schedule.every().monday.at("19:00").do(collect_emails)
+schedule.every().day.at("10:56").do(send_emails)
 
 
 def start_scheduler(request):
