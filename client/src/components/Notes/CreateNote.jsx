@@ -72,7 +72,7 @@ const CreateNote = () => {
                         <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
                     </article>
 
-                    <article className="flex flex-col items-center mt-28">
+                    <article className="answer flex flex-col items-center mt-28">
                         <h1 className="text-5xl my-10 text-center">Why do you feel this way?</h1>
                         
                         <form onSubmit={handleSubmit(sendAnswer)} className="flex flex-col">

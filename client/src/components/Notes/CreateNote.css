@@ -9,15 +9,19 @@
 }
 
 .desc {
-    width: 60vw;
-    height: 20vh;
+    width: 50vw;
+    height: 32vh;
+    border-radius: 20px;
+    padding: 10px;
+    resize: none;
 }
 
 .animated-img {
     min-width: 40vw;
 }
 
-.emotions {
+.emotions,
+.answer {
     max-width: 60vw;
 }
 
