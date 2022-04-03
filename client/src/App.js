@@ -17,7 +17,6 @@ function App() {
       <Routes>
         <Route path="/" element={user ? <CreateNote /> : <Navigate to="/login" />}/>
         <Route path="/notes/:userId" element={<AllNotes />}/>
-        <Route path="/notes/:userId/:noteId" element={<AllNotes />}/>
         <Route path="/weekly-report/:userId" element={<WeeklyReport />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

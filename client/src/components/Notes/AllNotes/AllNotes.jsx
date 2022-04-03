@@ -35,7 +35,6 @@ const AllNotes = () => {
                     <p>
                         Date: {note.date}
                     </p>
-                    <Link to={`/notes/${user.user_id}/${note.id}`}>Open note</Link>
                 </div>
 
                 </article>
