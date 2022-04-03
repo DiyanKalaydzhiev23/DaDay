@@ -84,7 +84,7 @@ const CreateNote = () => {
             {!isLoading && emotion && isSubmitted &&
                 <section className="flex px-10">
                     <article className="animated-img mt-32">
-                        <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
+                        <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" loop="infinite" className="animated-cat"/>
                     </article>
 
                     <article>

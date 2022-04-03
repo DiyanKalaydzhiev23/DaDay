@@ -21,7 +21,6 @@ const register = async (data, avatar) => {
 
 
     const responseData = await response.json();
-
     localStorage.setItem('user', JSON.stringify(responseData));
 
     if (!response.ok) {
