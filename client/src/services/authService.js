@@ -1,6 +1,6 @@
 import { baseUrl } from "../constants";
 
-const register = async (data) => {
+const register = async (data, avatar) => {
     if (data.password != data.repeatPassword) {
         throw new Error('Passwords must match!');
     }
@@ -8,7 +8,7 @@ const register = async (data) => {
     const reqBody = { 
         username: data.username, 
         password: data.password, 
-        profile: { parent_email: data.parentEmail, avatar: Number(data.avatar) }
+        profile: { parent_email: data.parentEmail, avatar: Number(avatar) }
     };
 
     const response = await fetch(`${baseUrl}/auth/register/`, {
@@ -19,14 +19,16 @@ const register = async (data) => {
         }
     });
 
+
     const responseData = await response.json();
-    // localStorage.setItem('user', JSON.stringify({ username: data.username, token: responseData.token }));
+
+    localStorage.setItem('user', JSON.stringify(responseData));
 
     if (!response.ok) {
         throw new Error(responseData);
     }
 
-    login({ username: data.username, password: data.password });
+    return responseData;
 }
 
 const login = async (data) => {

@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { authService } from '../../services/authService';
 
+import './Register.css';
+
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onSubmit', reValidateMode: 'onChange' });
     const navigate = useNavigate();
+
+    const [avatar, setAvatar] = useState(null);
     
     const registerUser = (data) => {
-        authService.register(data)
+        authService.register(data, avatar)
             .then(() => {
                 navigate('/');
             })
@@ -46,9 +51,16 @@ const Register = () => {
                 </article>
 
                 <article className="input-group">
-                    <label htmlFor="avatar">Avatar</label>
-                    <input {...register('avatar', { required: {value: true, message: 'Avatar is required!'}})} type="number" name="avatar" id="avatar"  className="form-input"/>
-                    {errors.avatar && <p>{errors.avatar.message}</p>}
+                    <label htmlFor="avatar">Choose your Avatar</label>
+                    <section className="flex mt-5">
+                        <article className="flex flex-col items-center">
+                            <img src="https://res.cloudinary.com/drinka/image/upload/v1648977221/da-day/cat/cat-main_jmglcl.png" alt="Cat"  onClick={() => setAvatar(1)} className="avatar"/>
+                        </article>
+
+                        <article className="flex flex-col items-center">
+                            <img src="https://res.cloudinary.com/drinka/image/upload/v1648973984/da-day/duck/duck-main_nz3pab.png" alt="Duck" onClick={() => setAvatar(2)} className="avatar"/>
+                        </article>
+                    </section>
                 </article>
 
                 <article className="input-group">

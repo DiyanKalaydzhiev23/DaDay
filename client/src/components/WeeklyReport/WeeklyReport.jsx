@@ -15,7 +15,6 @@ const WeeklyReport = () => {
 
         notesService.getReport(userId)
             .then(response => {
-                console.log(response);
                 setEmotions(response);
                 setIsLoading(false);
             })
