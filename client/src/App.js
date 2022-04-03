@@ -14,7 +14,7 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<CreateNote />}/>
+        <Route path="/" element={user ? <CreateNote /> : <Navigate to="/login" />}/>
         <Route path="/weekly-report/:userId" element={<WeeklyReport />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
