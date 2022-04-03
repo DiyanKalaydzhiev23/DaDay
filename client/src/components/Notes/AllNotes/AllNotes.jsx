@@ -5,11 +5,18 @@ import { Link } from "react-router-dom";
 
 import './AllNotes.css';
 
+import { useNavigate } from "react-router";
+
 const AllNotes = () => {
     const [notes, setNotes] = useState([]);
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (!user) {
+            navigate('/login');
+
+        }
         notesService.getReport(user.user_id)
             .then((response) => {
 
@@ -18,7 +25,7 @@ const AllNotes = () => {
                 }));
             })
             .catch(err => {
-                console.log(err);
+                navigate('/login');
             });
     });
 
