@@ -21,8 +21,8 @@ def my_mail(request=None, email=None):
         profiles = list(Profile.objects.filter(parent_email=email))
 
         subject = "Weekly report"
-        msg = "Hello!" \
-              f"Your weekly report is ready{'s' if len(profiles) > 1 else ''}," \
+        msg = "Hello! " \
+              f"Your weekly report is ready{'s' if len(profiles) > 1 else ''}, " \
               f"you can access it on link: " \
               f"{', '.join([f'{UserModel.objects.get(id=p.user_id).username}: 127.0.0.1:3000/weekly-report/{p.user_id}' for p in profiles])}"
 
