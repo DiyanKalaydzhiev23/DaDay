@@ -15,7 +15,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={user ? <CreateNote /> : <Navigate to="/login" />}/>
-        <Route path="/monthly-report" element={<MonthlyReport />} />
+        <Route path="/weekly-report" element={<MonthlyReport />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
