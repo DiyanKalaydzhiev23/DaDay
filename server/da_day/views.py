@@ -21,6 +21,18 @@ class NotesListView(views.APIView):
         return Response(data=serializer.data)
 
 
+class NoteDetailsView(views.APIView):
+    permission_classes = (
+        permissions.AllowAny,
+    )
+
+    def get(self, request, pk):
+        queryset = Note.objects.get(pk=pk)
+        serializer = NoteSerializer(queryset, many=False)
+
+        return Response({'note': serializer.data}, status=status.HTTP_200_OK)
+
+
 class NoteCreateView(views.APIView):
     queryset = Question.objects.all()
     permission_classes = (
