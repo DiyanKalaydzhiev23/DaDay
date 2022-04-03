@@ -10,9 +10,9 @@ const CreateNote = () => {
     const [question, setQuestion] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [emotion, setEmotion] = useState(null);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-    console.log(user);
     const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onSubmit', reValidateMode: 'onChange' });
 
     const navigate = useNavigate();
@@ -38,10 +38,8 @@ const CreateNote = () => {
 
     const sendAnswer = (data) => {
         notesService.createOne(user, { avatar: emotion, text: data.description })
-            .then(response => {
-                if (response.status == 'success') {
-                    navigate('/register');
-                }
+            .then(() => {
+                setIsSubmitted(true);
             })
             .catch(err => {
                 console.log(err);
@@ -66,7 +64,7 @@ const CreateNote = () => {
                 </section>
             }
 
-            {!isLoading && emotion &&
+            {!isLoading && emotion && !isSubmitted &&
                 <section className="flex px-10">
                     <article className="animated-img mt-32">
                         <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
@@ -79,6 +77,18 @@ const CreateNote = () => {
                             <textarea {...register('description', { required: { value: true } })} name="description" type="text" className="desc mt-20 bg-transparent border-2 border-orange-200" />
                             <input type="submit" value="Send Answer" />
                         </form>
+                    </article>
+                </section>
+            }
+
+            {!isLoading && emotion && isSubmitted &&
+                <section className="flex px-10">
+                    <article className="animated-img mt-32">
+                        <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
+                    </article>
+
+                    <article>
+                        <h1 className="title mt-36">Thank you for your response! I'd be glad to chat with you tomorrow too!</h1>
                     </article>
                 </section>
             }
