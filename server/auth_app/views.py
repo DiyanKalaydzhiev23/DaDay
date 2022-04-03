@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model, authenticate, login
 from rest_framework import permissions, generics, status, views
 from rest_framework.response import Response
+
+from server.auth_app.models import Profile
 from server.auth_app.serializers import UserSerializer
 from rest_framework.authtoken.models import Token
 from server.common.helpers import my_mail
@@ -21,7 +23,9 @@ class UserCreate(generics.CreateAPIView):
         headers = self.get_success_headers(serializer.data)
         token, created = Token.objects.get_or_create(user=serializer.instance)
         my_mail(request, request.data.get('profile.parent_email'))
-        return Response({'token': token.key}, status=status.HTTP_201_CREATED, headers=headers)
+        user = UserModel.objects.get(username=serializer.data['username'])
+        return Response({'token': token.key, 'user_id': user.id, 'username': user.username},
+                        status=status.HTTP_201_CREATED, headers=headers)
 
 
 class LoginUserView(views.APIView):

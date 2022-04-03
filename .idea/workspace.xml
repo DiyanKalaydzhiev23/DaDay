@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="acf2e678-b4bd-4c51-8e17-2961c443ee31" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/server/auth_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/auth_app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/common/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/common/helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/common/schedule.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/common/schedule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/auth_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/auth_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1648882667436</updated>
       <workItem from="1648882696067" duration="51041000" />
-      <workItem from="1648970059487" duration="2671000" />
+      <workItem from="1648970059487" duration="3339000" />
     </task>
     <servers />
   </component>
