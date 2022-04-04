@@ -34,7 +34,7 @@ const CreateNote = () => {
             .catch(err => {
                 console.log(err);
             })
-    }, [user.user_id]);
+    }, [user.user_id, user.username]);
 
     const sendAnswer = (data) => {
         notesService.createOne(user, { avatar: emotion, text: data.description })
@@ -57,8 +57,8 @@ const CreateNote = () => {
 
                     <article className="emotions flex flex-col items-center mt-28">
                         <h1 className="text-5xl my-10 text-center">{question}</h1>
-                        <section className="flex mt-10">
-                            {Object.entries(emotions).map((kvp, i) => <img key={i} onClick={() => setEmotion(kvp[1])} src={kvp[0]} alt="avatar" className="emotion-card w-36 h-36 mx-5 rounded-3xl"/>)}
+                        <section className="flex flex-wrap mt-10">
+                            {Object.entries(emotions).map((kvp, i) => <img key={i} onClick={() => setEmotion(kvp[1])} src={kvp[0]} alt="avatar" className="emotion-card w-28 h-28 mx-3 my-5 rounded-3xl"/>)}
                         </section>
                     </article>
                 </section>
