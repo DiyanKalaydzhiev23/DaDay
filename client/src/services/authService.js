@@ -41,11 +41,11 @@ const login = async (data) => {
     });
 
     const responseData = await response.json();
-
+    
     if (!response.ok) {
         throw new Error(responseData);
     }
-
+    
     localStorage.setItem('user', JSON.stringify(responseData));
     return responseData;
 }
