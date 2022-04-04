@@ -4,15 +4,12 @@ import { notesService } from "../../../services/notesService";
 import { useForm } from "react-hook-form";
 
 import './CreateNote.css';
-import { Navigate, useNavigate } from "react-router";
 
 const CreateNote = () => {
     const [question, setQuestion] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [emotion, setEmotion] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
-
-    const navigate = useNavigate();
 
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
@@ -27,11 +24,6 @@ const CreateNote = () => {
     };
 
     useEffect(() => {
-        if (!user) {
-            console.log('in');
-            navigate('/login');
-        }
-
         setIsLoading(true);
 
         notesService.getOne(user.user_id)
@@ -56,58 +48,53 @@ const CreateNote = () => {
     } 
 
     return (
-        <>
-            {!user && <Navigate to="/login" />}
-            {user && 
-                <section className="flex flex-col items-center justify-center">
-                    {isLoading && <p>Loading ...</p>}
-                    {!isLoading && !emotion &&
-                        <section className="flex px-10">
-                            <article className="animated-img mt-32">
-                                <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
-                            </article>
+        <section className="flex flex-col items-center justify-center">
+            {isLoading && <p>Loading ...</p>}
+            {!isLoading && !emotion &&
+                <section className="flex px-10">
+                    <article className="animated-img mt-32">
+                        <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
+                    </article>
 
-                            <article className="emotions flex flex-col items-center mt-28">
-                                <h1 className="text-5xl my-10 text-center">{question}</h1>
-                                <section className="flex flex-wrap mt-10">
-                                    {Object.entries(emotions).map((kvp, i) => <img key={i} onClick={() => setEmotion(kvp[1])} src={kvp[0]} alt="avatar" className="emotion-card w-28 h-28 mx-3 my-5 rounded-3xl"/>)}
-                                </section>
-                            </article>
+                    <article className="emotions flex flex-col items-center mt-28">
+                        <h1 className="text-5xl my-10 text-center">{question}</h1>
+                        <section className="flex flex-wrap mt-10">
+                            {Object.entries(emotions).map((kvp, i) => <img key={i} onClick={() => setEmotion(kvp[1])} src={kvp[0]} alt="avatar" className="emotion-card w-28 h-28 mx-3 my-5 rounded-3xl"/>)}
                         </section>
-                    }
-
-                    {!isLoading && emotion && !isSubmitted &&
-                        <section className="flex px-10">
-                            <article className="animated-img mt-32">
-                                <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
-                            </article>
-
-                            <article className="answer flex flex-col items-center mt-28">
-                                <h1 className="text-5xl my-10 text-center">Why do you feel this way?</h1>
-                                
-                                <form onSubmit={handleSubmit(sendAnswer)} className="flex flex-col">
-                                    <textarea {...register('description', { required: { value: true } })} name="description" type="text" className="desc mt-20 bg-transparent border-2 border-orange-200" />
-                                    <input type="submit" value="Send Answer" />
-                                </form>
-                            </article>
-                        </section>
-                    }
-
-                    {!isLoading && emotion && isSubmitted &&
-                        <section className="flex px-10">
-                            <article className="animated-img mt-32">
-                                <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" loop="infinite" className="animated-cat"/>
-                            </article>
-
-                            <article>
-                                <h1 className="title mt-36">Thank you for your response! I'd be glad to chat with you tomorrow too!</h1>
-                            </article>
-                        </section>
-                    }
+                    </article>
                 </section>
             }
-        </>
-    );
+
+            {!isLoading && emotion && !isSubmitted &&
+                <section className="flex px-10">
+                    <article className="animated-img mt-32">
+                        <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" className="animated-cat"/>
+                    </article>
+
+                    <article className="answer flex flex-col items-center mt-28">
+                        <h1 className="text-5xl my-10 text-center">Why do you feel this way?</h1>
+                        
+                        <form onSubmit={handleSubmit(sendAnswer)} className="flex flex-col">
+                            <textarea {...register('description', { required: { value: true } })} name="description" type="text" className="desc mt-20 bg-transparent border-2 border-orange-200" />
+                            <input type="submit" value="Send Answer" />
+                        </form>
+                    </article>
+                </section>
+            }
+
+            {!isLoading && emotion && isSubmitted &&
+                <section className="flex px-10">
+                    <article className="animated-img mt-32">
+                        <img src="https://res.cloudinary.com/drinka/image/upload/v1648968348/da-day/cat-animation_gyamxz.gif" alt="Cat" loop="infinite" className="animated-cat"/>
+                    </article>
+
+                    <article>
+                        <h1 className="title mt-36">Thank you for your response! I'd be glad to chat with you tomorrow too!</h1>
+                    </article>
+                </section>
+            }
+        </section>
+    )
 }
 
 export default CreateNote;
