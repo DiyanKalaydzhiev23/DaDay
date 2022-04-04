@@ -11,8 +11,8 @@ const getReport = async (userId) => {
     return data;
 }
 
-const getNote = async (noteId) => {
-    const response = await fetch(`${baseUrl}/note/${noteId}`);
+const getNote = async (userId, noteId) => {
+    const response = await fetch(`${baseUrl}/notes/${userId}/${noteId}`);
     const data = await response.json();
 
     if (!response.ok) {
@@ -22,8 +22,8 @@ const getNote = async (noteId) => {
     return data;
 }
 
-const getOne = async (userId) => {
-    const response = await fetch(`${baseUrl}/share-day/${userId}`, {
+const getOne = async (user) => {
+    const response = await fetch(`${baseUrl}/share-day/${user.user_id}`, {
         headers: { 
             'Content-Type': 'application/json'
         }
