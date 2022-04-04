@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { notesService } from "../../services/notesService";
+import { notesService } from "../../../services/notesService";
 import { useForm } from "react-hook-form";
-import { useNavigate } from 'react-router-dom';
 
 import './CreateNote.css';
 
@@ -13,10 +12,8 @@ const CreateNote = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-    const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onSubmit', reValidateMode: 'onChange' });
+    const { register, handleSubmit } = useForm({ mode: 'onSubmit', reValidateMode: 'onChange' });
 
-    const navigate = useNavigate();
-    
     const emotions = { 
         'https://res.cloudinary.com/drinka/image/upload/v1648927369/da-day/emotions/emotion-1_vxvybb.png': 1,
         'https://res.cloudinary.com/drinka/image/upload/v1648927369/da-day/emotions/emotion-2_ticimn.png': 2,
@@ -28,11 +25,14 @@ const CreateNote = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getOne(user)
+        notesService.getOne(user.user_id)
             .then(response => {
                 const question = response.question.replace(/<.+>/, user.username);
                 setQuestion(question);
                 setIsLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
             })
     }, [user.user_id]);
 
@@ -58,7 +58,7 @@ const CreateNote = () => {
                     <article className="emotions flex flex-col items-center mt-28">
                         <h1 className="text-5xl my-10 text-center">{question}</h1>
                         <section className="flex mt-10">
-                            {Object.entries(emotions).map((kvp, i) => <img key={i} onClick={() => setEmotion(kvp[1])} src={kvp[0]} className="emotion-card w-36 h-36 mx-5 rounded-3xl"/>)}
+                            {Object.entries(emotions).map((kvp, i) => <img key={i} onClick={() => setEmotion(kvp[1])} src={kvp[0]} alt="avatar" className="emotion-card w-36 h-36 mx-5 rounded-3xl"/>)}
                         </section>
                     </article>
                 </section>
