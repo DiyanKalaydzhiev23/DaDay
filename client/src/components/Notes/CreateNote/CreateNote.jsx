@@ -22,7 +22,7 @@ const CreateNote = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getOne(user.user_id)
+        notesService.getOne(user)
             .then(response => {
                 const question = response.question.replace(/<.+>/, user.username);
                 setQuestion(question);

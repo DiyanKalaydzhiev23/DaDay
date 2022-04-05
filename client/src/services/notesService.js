@@ -1,7 +1,11 @@
 import { baseUrl } from "../constants";
 
-const getReport = async (userId) => {
-    const response = await fetch(`${baseUrl}/notes/${userId}`);
+const getReport = async (userId, token) => {
+    const response = await fetch(`${baseUrl}/notes/${userId}`, {
+        headers: {
+            'Authorization': `Token ${token}`
+        }
+    });
     const data = await response.json();
 
     if (!response.ok) {
@@ -11,8 +15,12 @@ const getReport = async (userId) => {
     return data;
 }
 
-const getNote = async (noteId) => {
-    const response = await fetch(`${baseUrl}/note/${noteId}`);
+const getNote = async (noteId, token) => {
+    const response = await fetch(`${baseUrl}/note/${noteId}`, {
+        headers: {
+            'Authorization': `Token ${token}`
+        }
+    });
     const data = await response.json();
 
     if (!response.ok) {
@@ -22,10 +30,11 @@ const getNote = async (noteId) => {
     return data;
 }
 
-const getOne = async (userId) => {
-    const response = await fetch(`${baseUrl}/share-day/${userId}`, {
+const getOne = async (user) => {
+    const response = await fetch(`${baseUrl}/share-day/${user.user_id}`, {
         headers: { 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${user.token}`
         }
     });
     const data = await response.json();
@@ -42,7 +51,8 @@ const createOne = async (user, data) => {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${user.token}`
         }
     });
 

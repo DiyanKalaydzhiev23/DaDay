@@ -9,8 +9,10 @@ const NoteDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { userId, noteId } = useParams();
 
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
     useEffect(() => {
-        notesService.getNote(noteId)
+        notesService.getNote(noteId, user.token)
             .then(response => {
                 const note = response.note;
                 note.date = formatDate(note.date);

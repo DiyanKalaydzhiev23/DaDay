@@ -10,10 +10,6 @@ UserModel = get_user_model()
 
 
 class NotesListView(views.APIView):
-    permission_classes = (
-        permissions.AllowAny,
-    )
-
     def get(self, request, pk):
         queryset = Note.objects.filter(user=pk)
         serializer = NoteSerializer(queryset, many=True)
@@ -22,10 +18,6 @@ class NotesListView(views.APIView):
 
 
 class NoteDetailsView(views.APIView):
-    permission_classes = (
-        permissions.AllowAny,
-    )
-
     def get(self, request, pk):
         queryset = Note.objects.get(pk=pk)
         serializer = NoteSerializer(queryset, many=False)
@@ -35,10 +27,6 @@ class NoteDetailsView(views.APIView):
 
 class NoteCreateView(views.APIView):
     queryset = Question.objects.all()
-    permission_classes = (
-        permissions.AllowAny,
-    )
-
     def get(self, request, pk):
         question = random.choice(self.queryset.all()).__str__()
         return Response({'question': question}, status=status.HTTP_200_OK)

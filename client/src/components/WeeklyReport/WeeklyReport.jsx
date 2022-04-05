@@ -6,6 +6,7 @@ import ReportChart from './ReportChart';
 
 const WeeklyReport = () => {
     const { userId } = useParams();
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
     const [emotions, setEmotions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +14,7 @@ const WeeklyReport = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getReport(userId)
+        notesService.getReport(userId, user.token)
             .then(response => {
                 setEmotions(response);
                 setIsLoading(false);
