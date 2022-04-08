@@ -12,7 +12,7 @@ const NoteDetails = () => {
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
     useEffect(() => {
-        notesService.getNote(noteId, user.token)
+        notesService.getOne(noteId, user.token)
             .then(response => {
                 const note = response.note;
                 note.date = formatDate(note.date);

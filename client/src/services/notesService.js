@@ -1,6 +1,6 @@
 import { baseUrl } from "../constants";
 
-const getReport = async (userId, token) => {
+const getAll = async (userId, token) => {
     const response = await fetch(`${baseUrl}/notes/${userId}`, {
         headers: {
             'Authorization': `Token ${token}`
@@ -15,25 +15,9 @@ const getReport = async (userId, token) => {
     return data;
 }
 
-const getNote = async (noteId, token) => {
+const getOne = async (noteId, token) => {
     const response = await fetch(`${baseUrl}/note/${noteId}`, {
         headers: {
-            'Authorization': `Token ${token}`
-        }
-    });
-    const data = await response.json();
-
-    if (!response.ok) {
-        throw new Error(data);
-    }
-
-    return data;
-}
-
-const getOne = async (userId, token) => {
-    const response = await fetch(`${baseUrl}/share-day/${userId}`, {
-        headers: { 
-            'Content-Type': 'application/json',
             'Authorization': `Token ${token}`
         }
     });
@@ -63,4 +47,4 @@ const createOne = async (user, data) => {
     return { status: 'success' };
 }
 
-export const notesService = { getReport, getOne, createOne, getNote };
+export const notesService = { getAll, getOne, createOne };

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { questionsService } from "../../../services/questionsService";
 import { notesService } from "../../../services/notesService";
 import { useForm } from "react-hook-form";
 
@@ -22,7 +23,7 @@ const CreateNote = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getOne(user.user_id, user.token)
+        questionsService.getOne(user.user_id, user.token)
             .then(response => {
                 const question = response.question.replace(/<.+>/, user.username);
                 setQuestion(question);
