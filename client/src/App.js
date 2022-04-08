@@ -20,12 +20,12 @@ function App() {
           <Route path="/share-day" element={<CreateNote />} />
           <Route path="/notes/:userId" element={<AllNotes />}/>
           <Route path="/notes/:userId/:noteId" element={<NoteDetails />}/>
-          <Route path="/weekly-report/:userId" element={<WeeklyReport />} />
         </Route>
         
         <Route element={<GuestRoute />}>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/weekly-report/:userId" element={<WeeklyReport />} />
         </Route>
       </Routes>
     </Layout>
