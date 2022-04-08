@@ -6,7 +6,6 @@ import ReportChart from './ReportChart';
 
 const WeeklyReport = () => {
     const { userId } = useParams();
-    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
     const [emotions, setEmotions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +13,7 @@ const WeeklyReport = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getAll(userId, user.token, false)
+        notesService.getAll(userId, null, false)
             .then(response => {
                 setEmotions(response);
                 setIsLoading(false);
@@ -22,7 +21,7 @@ const WeeklyReport = () => {
             .catch(err => {
                 console.log(err);
             })
-    }, [userId, user.token]);
+    }, [userId]);
 
     return (
         <>  
