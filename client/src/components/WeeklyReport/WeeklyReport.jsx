@@ -22,7 +22,7 @@ const WeeklyReport = () => {
             .catch(err => {
                 console.log(err);
             })
-    }, [userId]);
+    }, [userId, user]);
 
     return (
         <>  

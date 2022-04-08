@@ -31,7 +31,7 @@ const CreateNote = () => {
             .catch(err => {
                 console.log(err);
             })
-    }, [user.user_id, user.username]);
+    }, [user]);
 
     const sendAnswer = (data) => {
         notesService.createOne(user, { avatar: emotion, text: data.description })

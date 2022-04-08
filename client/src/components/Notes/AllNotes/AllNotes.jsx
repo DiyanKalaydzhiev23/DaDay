@@ -19,7 +19,7 @@ const AllNotes = () => {
             .catch(err => {
                 console.log(err);
             });
-    }, [user.user_id]);
+    }, [user]);
 
 
     return (

@@ -23,7 +23,7 @@ const NoteDetails = () => {
             .catch(err => {
                 console.log(err);
             });
-    }, [noteId]);
+    }, [noteId, user.token]);
     
     return (
         <section className="flex justify-center pt-10">
