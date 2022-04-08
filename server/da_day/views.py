@@ -1,6 +1,6 @@
 import random
 from django.contrib.auth import get_user_model
-from rest_framework import views, permissions, status
+from rest_framework import views, status
 from rest_framework.response import Response
 from server.da_day.models import Note, Question
 from server.da_day.serializers import NoteSerializer
@@ -11,9 +11,6 @@ UserModel = get_user_model()
 
 class NotesListView(views.APIView):
     def get(self, request, pk):
-        if not request.user.is_authenticated():
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         queryset = Note.objects.filter(user=pk)
         serializer = NoteSerializer(queryset, many=True)
 
