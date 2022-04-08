@@ -19,11 +19,11 @@ const AllNotes = () => {
             .catch(err => {
                 console.log(err);
             });
-    }, [user]);
+    }, [user.user_id, user.token]);
 
 
     return (
-        <section className="flex flex-wrap justify-around pt-5">
+        <section className="notes flex flex-wrap justify-around pt-5">
             {notes.map((note, i) => 
                 <article className="note text-black bg-white rounded-xl transition duration-1000 ease-in-out w-80 h-full my-6 mx-6 p-5 break-words" key={i}>
 
