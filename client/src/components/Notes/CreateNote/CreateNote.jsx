@@ -22,7 +22,7 @@ const CreateNote = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getOne(user)
+        notesService.getOne(user.user_id, user.token)
             .then(response => {
                 const question = response.question.replace(/<.+>/, user.username);
                 setQuestion(question);
@@ -31,7 +31,7 @@ const CreateNote = () => {
             .catch(err => {
                 console.log(err);
             })
-    }, [user]);
+    }, [user.user_id, user.token]);
 
     const sendAnswer = (data) => {
         notesService.createOne(user, { avatar: emotion, text: data.description })

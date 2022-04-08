@@ -30,11 +30,11 @@ const getNote = async (noteId, token) => {
     return data;
 }
 
-const getOne = async (user) => {
-    const response = await fetch(`${baseUrl}/share-day/${user.user_id}`, {
+const getOne = async (userId, token) => {
+    const response = await fetch(`${baseUrl}/share-day/${userId}`, {
         headers: { 
             'Content-Type': 'application/json',
-            'Authorization': `Token ${user.token}`
+            'Authorization': `Token ${token}`
         }
     });
     const data = await response.json();
