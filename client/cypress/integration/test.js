@@ -11,7 +11,7 @@ describe('Login page', () => {
         cy.get('input[name="password"]').type('asdasd{enter}');
 
         cy.url().should('include', '/share-day');
-        cy.get('nav').should('contain', 'Log out')
+        cy.get('nav').should('contain', 'Log out');
     });
 });
 

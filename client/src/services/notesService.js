@@ -1,7 +1,7 @@
 import { baseUrl } from "../constants";
 
-const getAll = async (userId, token) => {
-    const response = await fetch(`${baseUrl}/notes/${userId}`, {
+const getAll = async (userId, token, secure) => {
+    const response = await fetch(`${baseUrl}/notes/${userId}?secure=${secure}`, {
         headers: {
             'Authorization': `Token ${token}`
         }

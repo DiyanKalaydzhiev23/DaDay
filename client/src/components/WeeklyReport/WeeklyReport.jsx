@@ -14,7 +14,7 @@ const WeeklyReport = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        notesService.getReport(userId, user.token)
+        notesService.getAll(userId, user.token, true)
             .then(response => {
                 setEmotions(response);
                 setIsLoading(false);
