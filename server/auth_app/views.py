@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model, authenticate, login
-from rest_framework import generics, status, views
+from rest_framework import permissions, generics, status, views
 from rest_framework.response import Response
+
 from server.auth_app.models import Profile
 from server.auth_app.serializers import UserSerializer
 from rest_framework.authtoken.models import Token
@@ -13,6 +14,7 @@ UserModel = get_user_model()
 class UserCreate(generics.CreateAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.AllowAny,)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -29,6 +31,7 @@ class UserCreate(generics.CreateAPIView):
 
 class LoginUserView(views.APIView):
     queryset = UserModel.objects.all()
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
         username = request.data.get('username')

@@ -19,9 +19,6 @@ class NotesListView(views.APIView):
 
 class NoteDetailsView(views.APIView):
     def get(self, request, pk):
-        if not request.user.is_authenticated():
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         queryset = Note.objects.get(pk=pk)
         serializer = NoteSerializer(queryset, many=False)
 
@@ -30,18 +27,11 @@ class NoteDetailsView(views.APIView):
 
 class NoteCreateView(views.APIView):
     queryset = Question.objects.all()
-
     def get(self, request, pk):
-        if not request.user.is_authenticated():
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         question = random.choice(self.queryset.all()).__str__()
         return Response({'question': question}, status=status.HTTP_200_OK)
 
     def post(self, request, pk):
-        if not request.user.is_authenticated():
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         text = request.data.get('text')
         avatar = request.data.get('avatar')
 

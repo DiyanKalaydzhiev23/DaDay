@@ -71,7 +71,7 @@ const CreateNote = () => {
                     <article className="answer flex flex-col items-center mt-28">
                         <h1 className="text-5xl my-10 text-center">Why do you feel this way?</h1>
                         
-                        <form onSubmit={handleSubmit(sendAnswer)} className="flex flex-col">
+                        <form onSubmit={handleSubmit(sendAnswer)} className="flex flex-col" id="description-form">
                             <textarea {...register('description', { required: { value: true } })} name="description" type="text" className="desc mt-20 bg-transparent border-2 border-orange-200" />
                             <input type="submit" value="Send Answer" />
                         </form>

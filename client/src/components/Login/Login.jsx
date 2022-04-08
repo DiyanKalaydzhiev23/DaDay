@@ -21,7 +21,7 @@ const Login = () => {
         <section className="flex flex-col items-center">
             <h1 className="title">Log In</h1>
 
-            <form onSubmit={handleSubmit(loginUser)}>
+            <form onSubmit={handleSubmit(loginUser)} id="login-form">
                 <article className="input-group">
                     <label htmlFor="username">Username</label>
                     <input type="username" name="username" id="username" {...register('username', { required: { value: true, message: 'Username is required!' } })}  className="form-input"/>
