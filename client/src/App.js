@@ -15,6 +15,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Login />}/>
+        <Route path="/weekly-report/:userId" element={<WeeklyReport />} />
 
         <Route element={<UserRoute />}>
           <Route path="/share-day" element={<CreateNote />} />
@@ -25,7 +26,6 @@ function App() {
         <Route element={<GuestRoute />}>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/weekly-report/:userId" element={<WeeklyReport />} />
         </Route>
       </Routes>
     </Layout>
