@@ -40,10 +40,8 @@ class NoteDetailsView(views.APIView):
 class NoteCreateView(views.APIView):
     queryset = Question.objects.all()
 
-    def get(self, request, user_id, pk):
-        if not self.request.META.get('HTTP_AUTHORIZATION'):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
+    def get(self, request, pk):
+        authenticated_user(request, pk)
         question = random.choice(self.queryset.all()).__str__()
         return Response({'question': question}, status=status.HTTP_200_OK)
 
