@@ -2,6 +2,8 @@ import random
 from django.contrib.auth import get_user_model
 from rest_framework import views, status
 from rest_framework.response import Response
+
+from server.common.helpers import authenticated_user
 from server.da_day.models import Note, Question
 from server.da_day.serializers import NoteSerializer
 
@@ -14,9 +16,7 @@ class NotesListView(views.APIView):
     permission_classes = []
 
     def get(self, request, pk):
-        if self.request.query_params.get('secure') == 'true':
-            if not self.request.META.get('HTTP_AUTHORIZATION'):
-                return Response(status=status.HTTP_403_FORBIDDEN)
+        authenticated_user(request, pk)
 
         if self.request.query_params.get('sorting') == 'asc':
             queryset = Note.objects.filter(user=pk).order_by('date')
@@ -29,11 +29,8 @@ class NotesListView(views.APIView):
 
 
 class NoteDetailsView(views.APIView):
-    def get(self, request, pk):
-
-        if self.request.query_params.get('secure'):
-            if not self.request.META.get('HTTP_AUTHORIZATION'):
-                return Response(status=status.HTTP_403_FORBIDDEN)
+    def get(self, request, user_id, pk):
+        authenticated_user(request, user_id)
 
         queryset = Note.objects.get(pk=pk)
         serializer = NoteSerializer(queryset, many=False)
@@ -44,9 +41,9 @@ class NoteDetailsView(views.APIView):
 class NoteCreateView(views.APIView):
     queryset = Question.objects.all()
 
-    def get(self, request, pk):
+    def get(self, request, user_id, pk):
         if not self.request.META.get('HTTP_AUTHORIZATION'):
-                return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
         question = random.choice(self.queryset.all()).__str__()
         return Response({'question': question}, status=status.HTTP_200_OK)
