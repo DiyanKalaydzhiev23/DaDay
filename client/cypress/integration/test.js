@@ -1,3 +1,5 @@
+import mockData from './mockData';
+
 describe('Login page', () => {
     it('Login page loads', () => {
         cy.visit('/login');
@@ -7,8 +9,8 @@ describe('Login page', () => {
     it('Login functionality works when entered correct username and password', () => {
         cy.visit('/login');
 
-        cy.get('input[name=username]').type('mariana');
-        cy.get('input[name="password"]').type('asdasd{enter}');
+        cy.get('input[name=username]').type(mockData.users[0].username);
+        cy.get('input[name=password]').type(`${mockData.users[0].password}{enter}`);
 
         cy.url().should('include', '/share-day');
         cy.get('nav').should('contain', 'Log out');
@@ -19,8 +21,8 @@ describe('Logout', () => {
     it('Logout logs out the user', () => {
         cy.visit('/login');
 
-        cy.get('input[name=username]').type('mariana');
-        cy.get('input[name="password"]').type('asdasd{enter}');
+        cy.get('input[name=username]').type(mockData.users[0].username);
+        cy.get('input[name="password"]').type(`${mockData.users[0].password}{enter}`);
 
         cy.wait(2000);
         cy.url().should('include', '/share-day');
@@ -31,11 +33,17 @@ describe('Logout', () => {
 });
 
 describe('Share day', () => {
+    it('Redirects to login page for non-authenticated user', () => {
+        cy.visit('/share-day');
+
+        cy.get('#login-form').should('exist');
+    });
+    
     it('Emotion selection loads on share day page', () => {
         cy.visit('/login');
 
-        cy.get('input[name=username]').type('mariana');
-        cy.get('input[name="password"]').type('asdasd{enter}');
+        cy.get('input[name=username]').type(mockData.users[0].username);
+        cy.get('input[name=password]').type(`${mockData.users[0].password}{enter}`);
 
         cy.wait(2000);
         cy.url().should('include', '/share-day');
@@ -46,8 +54,8 @@ describe('Share day', () => {
     it('Emotion selection functionality works', () => {
         cy.visit('/login');
 
-        cy.get('input[name=username]').type('mariana');
-        cy.get('input[name="password"]').type('asdasd{enter}');
+        cy.get('input[name=username]').type(mockData.users[0].username);
+        cy.get('input[name=password]').type(`${mockData.users[0].password}{enter}`);
 
         cy.url().should('include', '/share-day');
 
@@ -61,8 +69,8 @@ describe('Share day', () => {
     it('Note add works correctly', () => {
         cy.visit('/login');
 
-        cy.get('input[name=username]').type('mariana');
-        cy.get('input[name="password"]').type('asdasd{enter}');
+        cy.get('input[name=username]').type(mockData.users[0].username);
+        cy.get('input[name=password]').type(`${mockData.users[0].password}{enter}`);
 
         cy.url().should('include', '/share-day');
 
@@ -77,17 +85,71 @@ describe('Share day', () => {
 });
 
 describe('All notes', () => {
-    it('All notes works', () => {
+    it('Loads all notes for authenticated users', () => {
         cy.visit('/login');
 
-        cy.get('input[name=username]').type('mariana');
-        cy.get('input[name="password"]').type('asdasd{enter}');
+        cy.get('input[name=username]').type(mockData.users[0].username);
+        cy.get('input[name=password]').type(`${mockData.users[0].password}{enter}`);
 
         cy.url().should('include', '/share-day');
 
         cy.visit('/notes/28');
 
         cy.get('.notes').should('contain', 'test');
+        cy.get('.note-description').last().should('have.text', mockData.notes[1].description);
+        cy.get('.note-date').last().should('have.text', `Date: ${mockData.notes[1].date}`);
+        cy.get('.details-btn').last().should('exist');
+    });
+
+    it('Redirects to login page for non-authenticated users', () => {
+        cy.visit('/notes/28');
+        cy.get('#login-form').should('exist');
     });
 });
 
+describe('Details', () => {
+    it('Loads details page for authenticated user', () => {
+        cy.visit('/login');
+
+        cy.get('input[name=username]').type(mockData.users[0].username);
+        cy.get('input[name=password]').type(`${mockData.users[0].password}{enter}`);
+
+        cy.url().should('include', '/share-day');
+
+        cy.visit('/notes/28');
+
+        cy.get('.details-btn').last().click({force: true});
+        cy.get('.note-description').last().should('have.text', mockData.notes[1].description);
+        cy.get('.note-date').last().should('have.text', `Date: ${mockData.notes[1].date}`);
+        cy.get('.back-btn').should('exist');
+    }); 
+
+    it('Redirects to login page for NON-authenticated user', () => {
+        cy.visit('/notes/28/68');
+
+        cy.get('#login-form').should('exist');
+    });
+});
+
+describe('Weekly Report', () => {
+    it('Loads weekly report when the user is logged in', () => {
+        cy.visit('/login');
+
+        cy.get('input[name=username]').type(mockData.users[0].username);
+        cy.get('input[name=password]').type(`${mockData.users[0].password}{enter}`);
+    
+        cy.url().should('include', '/share-day');
+    
+        cy.visit('/weekly-report/28');
+
+        cy.get('h1').should('contain', 'Weekly report');
+        cy.get('#report-chart').should('exist');
+    });
+
+    it('Loads weekly report when the user is NOT logged in', () => {
+        cy.visit('/weekly-report/28');
+
+        cy.get('h1').should('contain', 'Weekly report');
+        cy.get('#report-chart').should('exist');
+    });
+})
