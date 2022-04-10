@@ -31,7 +31,6 @@ class NotesListView(views.APIView):
 class NoteDetailsView(views.APIView):
     def get(self, request, user_id, pk):
         authenticated_user(request, user_id)
-
         queryset = Note.objects.get(pk=pk)
         serializer = NoteSerializer(queryset, many=False)
 

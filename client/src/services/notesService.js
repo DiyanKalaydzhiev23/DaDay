@@ -3,7 +3,7 @@ import { baseUrl } from "../constants";
 const getAll = async (userId, token, secure, sortingOrder) => {
     const response = await fetch(`${baseUrl}/notes/${userId}?secure=${secure}&sorting=${sortingOrder}`, {
         headers: {
-            'Authorization': `Token ${token}`
+            'Authorization': token
         }
     });
     const data = await response.json();
@@ -18,7 +18,7 @@ const getAll = async (userId, token, secure, sortingOrder) => {
 const getOne = async (noteId, token) => {
     const response = await fetch(`${baseUrl}/note/${noteId}`, {
         headers: {
-            'Authorization': `Token ${token}`
+            'Authorization': token
         }
     });
     const data = await response.json();
@@ -36,7 +36,7 @@ const createOne = async (user, data) => {
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Token ${user.token}`
+            'Authorization': user.token
         }
     });
 
