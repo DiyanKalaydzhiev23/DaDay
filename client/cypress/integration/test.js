@@ -1,12 +1,12 @@
 import mockData from './mockData';
 
 describe('Login page', () => {
-    it('Login page loads', () => {
+    it('Loads login page', () => {
         cy.visit('/login');
         cy.get('#login-form').should('exist');
     });
 
-    it('Login functionality works when entered correct username and password', () => {
+    it('Logs in the user when entered correct username and password', () => {
         cy.visit('/login');
 
         cy.get('input[name=username]').type(mockData.users[0].username);
@@ -14,6 +14,15 @@ describe('Login page', () => {
 
         cy.url().should('include', '/share-day');
         cy.get('nav').should('contain', 'Log out');
+    });
+
+    it('Displays an error message when entered incorrect username or password', () => {
+        cy.visit('/login');
+
+        cy.get('input[name=username]').type(`${mockData.users[0].username}1`);
+        cy.get('input[name=password]').type(`${mockData.users[0].password}1{enter}`);
+
+        cy.get('.Toastify').should('have.text', 'Wrong username or password!');
     });
 });
 
