@@ -14,9 +14,9 @@ class NotesListView(views.APIView):
     permission_classes = []
 
     def get(self, request, pk):
-        # if self.request.query_params.get('secure'):
-        #     if not self.request.user.is_authenticated:
-        #         return Response(status=status.HTTP_403_FORBIDDEN)
+        if self.request.query_params.get('secure'):
+            if not self.request.user.is_authenticated:
+                return Response(status=status.HTTP_403_FORBIDDEN)
 
         if self.request.query_params.get('sorting') == 'asc':
             queryset = Note.objects.filter(user=pk).order_by('date')
