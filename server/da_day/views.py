@@ -31,7 +31,7 @@ class NotesListView(views.APIView):
 class NoteDetailsView(views.APIView):
     def get(self, request, pk):
 
-        if self.request.query_params.get('secure'):
+        if self.request.query_params.get('secure') == 'true':
             if not self.request.META.get('HTTP_AUTHORIZATION'):
                 return Response(status=status.HTTP_403_FORBIDDEN)
 
