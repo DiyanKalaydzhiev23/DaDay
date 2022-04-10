@@ -38,7 +38,7 @@ describe('Share day', () => {
 
         cy.get('#login-form').should('exist');
     });
-    
+
     it('Emotion selection loads on share day page', () => {
         cy.visit('/login');
 
@@ -152,4 +152,4 @@ describe('Weekly Report', () => {
         cy.get('h1').should('contain', 'Weekly report');
         cy.get('#report-chart').should('exist');
     });
-})
+});
