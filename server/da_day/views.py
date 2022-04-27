@@ -42,6 +42,7 @@ class NoteCreateView(views.APIView):
     def get(self, request, pk):
         authenticated_user(request, pk)
         question = random.choice(self.queryset.all()).__str__()
+
         return Response({'question': question}, status=status.HTTP_200_OK)
 
     def post(self, request, pk):

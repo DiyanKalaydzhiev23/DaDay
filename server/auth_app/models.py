@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.contrib.auth import models as auth_models
@@ -11,8 +10,6 @@ class DaDayUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         max_length=25,
         unique=True,
     )
-
-    parent_email = models.EmailField()
 
     date_joined = models.DateTimeField(
         auto_now_add=True,
