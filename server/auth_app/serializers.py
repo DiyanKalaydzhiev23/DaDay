@@ -9,7 +9,7 @@ UserModel = get_user_model()
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('parent_email', 'avatar')
+        fields = ('parent_email', 'avatar', 'image')
 
 
 class UserSerializer(serializers.ModelSerializer):

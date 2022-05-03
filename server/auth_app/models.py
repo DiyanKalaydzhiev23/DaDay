@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.contrib.auth import models as auth_models
 from server.auth_app.managers import DaDayUserManager
+from django.contrib.postgres.fields import ArrayField
 
 
 class DaDayUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -27,6 +28,11 @@ class DaDayUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 class Profile(models.Model):
     parent_email = models.EmailField()
 
+    image = models.ImageField(
+        upload_to='images',
+        default='images/default_image_qvmqoi.png',
+    )
+
     avatar = models.IntegerField(
         validators=[
             MinValueValidator(1),
@@ -36,6 +42,16 @@ class Profile(models.Model):
 
     last_sent_email = models.DateTimeField(
         default=datetime.now()
+    )
+
+    friends = ArrayField(
+        models.IntegerField(),
+        default=list,
+    )
+
+    pending_friend_requests = ArrayField(
+        models.IntegerField(),
+        default=list,
     )
 
     user = models.OneToOneField(

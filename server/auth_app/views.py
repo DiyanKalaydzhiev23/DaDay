@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model, authenticate, login
 from rest_framework import generics, status, views
 from rest_framework.response import Response
 from server.auth_app.models import Profile
-from server.auth_app.serializers import UserSerializer
+from server.auth_app.serializers import UserSerializer, ProfileSerializer
 from rest_framework.authtoken.models import Token
 
 
@@ -67,3 +67,14 @@ class LoginUserView(views.APIView):
             return Response(data, status=status.HTTP_201_CREATED)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProfileView(views.APIView):
+    def get(self, request, user_id):
+        context = {
+            "is_owner": True if Token.objects.get(user_id=user_id) else False,
+            "user": UserSerializer(UserModel.objects.get(pk=user_id)).data,
+            "id": user_id,
+        }
+
+        return Response(context, status=status.HTTP_200_OK)

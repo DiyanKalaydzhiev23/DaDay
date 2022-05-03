@@ -132,4 +132,12 @@ CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
-CELER_TASK_RESULT_SERIALIZER = 'json'
+CELERY_TASK_RESULT_SERIALIZER = 'json'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dhqp5qtsw',
+    'API_KEY': '593912372856725',
+    'API_SECRET': 'iedqyBTS3_zeKMh0t1vR7HjkpZA',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
