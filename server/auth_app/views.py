@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model, authenticate, login
 from rest_framework import generics, status, views
 from rest_framework.response import Response
 from server.auth_app.models import Profile
-from server.auth_app.serializers import UserSerializer, ProfileSerializer
+from server.auth_app.serializers import UserSerializer
 from rest_framework.authtoken.models import Token
 
 

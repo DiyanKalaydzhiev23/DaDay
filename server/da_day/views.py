@@ -73,7 +73,7 @@ class NoteCreateView(views.APIView):
 
 class SendFriendRequestView(views.APIView):
     def get(self, request, user_id, profile_request_id):
-        # authenticated_user(request, user_id)
+        authenticated_user(request, user_id)
 
         profile_request = Profile.objects.get(pk=profile_request_id)
         already_sent_request = False
@@ -89,7 +89,7 @@ class SendFriendRequestView(views.APIView):
         }, status=status.HTTP_200_OK)
 
     def post(self, request, user_id, profile_request_id):
-        # authenticated_user(request, user_id)
+        authenticated_user(request, user_id)
 
         profile_request = Profile.objects.get(pk=profile_request_id)
         profile_request.pending_friend_requests.append(user_id)
@@ -100,7 +100,7 @@ class SendFriendRequestView(views.APIView):
 
 class HandleFriendRequestView(views.APIView):
     def post(self, request, user_id, profile_sending_request_id):
-        # authenticated_user(request, user_id)
+        authenticated_user(request, user_id)
 
         profile = Profile.objects.get(pk=user_id)
         profile_sending_request = Profile.objects.get(pk=profile_sending_request_id)
@@ -124,7 +124,7 @@ class HandleFriendRequestView(views.APIView):
 
 class SearchForFriendsView(views.APIView):
     def get(self, request, user_id):
-        # authenticated_user(request, user_id)
+        authenticated_user(request, user_id)
         searched_username = self.request.query_params.get('username')
 
         if searched_username:
@@ -151,7 +151,7 @@ class SearchForFriendsView(views.APIView):
 
 class FriendsView(views.APIView):
     def get(self, request, user_id):
-        # authenticated_user(request, user_id)
+        authenticated_user(request, user_id)
 
         profile = Profile.objects.get(pk=user_id)
         friends = [
@@ -168,7 +168,7 @@ class FriendsView(views.APIView):
 
 class PendingFriendRequestsView(views.APIView):
     def get(self, request, user_id):
-        # authenticated_user(request, user_id)
+        authenticated_user(request, user_id)
 
         profile = Profile.objects.get(pk=user_id)
         pending_friend_requests = [
