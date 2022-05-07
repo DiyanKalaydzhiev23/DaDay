@@ -106,9 +106,12 @@ class HandleFriendRequestView(views.APIView):
         profile_sending_request = Profile.objects.get(pk=profile_sending_request_id)
 
         if self.request.query_params.get('accept_request'):
-            profile.pending_friend_requests.remove(profile_sending_request_id)
-            profile.friends.append(profile_sending_request_id)
-            profile_sending_request.friends.append(user_id)
+            if len(profile.friends) < 5000:
+                profile.pending_friend_requests.remove(profile_sending_request_id)
+                profile.friends.append(profile_sending_request_id)
+                profile_sending_request.friends.append(user_id)
+            else:
+                return Response(status=status.HTTP_417_EXPECTATION_FAILED)
 
         elif self.request.query_params.get('remove_request'):
             profile.pending_friend_requests.remove(profile_sending_request_id)
@@ -181,4 +184,3 @@ class PendingFriendRequestsView(views.APIView):
         ]
 
         return Response({'pending_friend_requests': pending_friend_requests}, status=status.HTTP_200_OK)
-

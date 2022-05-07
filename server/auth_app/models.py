@@ -47,6 +47,7 @@ class Profile(models.Model):
     friends = ArrayField(
         models.IntegerField(),
         default=list,
+        size=8,
     )
 
     pending_friend_requests = ArrayField(
