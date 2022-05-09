@@ -26,7 +26,9 @@ class DaDayUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
 
 class Profile(models.Model):
-    parent_email = models.EmailField()
+    email = models.EmailField(
+        unique=True,
+    )
 
     image = models.ImageField(
         upload_to='images',
@@ -59,4 +61,16 @@ class Profile(models.Model):
         DaDayUser,
         on_delete=models.CASCADE,
         primary_key=True,
+    )
+
+
+class ResetPasswordData(models.Model):
+    user_id = models.IntegerField()
+
+    token = models.CharField(
+        max_length=150
+    )
+
+    token_submit = models.BooleanField(
+        default=False,
     )

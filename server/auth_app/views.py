@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth.hashers import make_password
 from rest_framework import generics, status, views
 from rest_framework.response import Response
-from server.auth_app.models import Profile
+from server.auth_app.models import Profile, ResetPasswordData
 from server.auth_app.serializers import UserSerializer
 from rest_framework.authtoken.models import Token
+from server.auth_app.tasks import handle_reset_password, delete_reset_password_token
 
 
 UserModel = get_user_model()
@@ -78,3 +80,46 @@ class ProfileView(views.APIView):
         }
 
         return Response(context, status=status.HTTP_200_OK)
+
+
+class ResetPasswordTokenView(views.APIView):
+    def get(self, request, email):
+        if Profile.objects.get(email=email):
+            handle_reset_password.delay(email)
+            delete_reset_password_token.delay(email)
+
+            return Response(status=status.HTTP_200_OK)
+
+        return Response({'error_message: No DaDay user with this email.'}, status=status.HTTP_404_NOT_FOUND)
+
+    def post(self, request, email):
+        user_id = Profile.objects.get(email=email).user.id
+        token_objects = ResetPasswordData.objects.filter(user_id=user_id)
+        tokens = [token.token for token in token_objects]
+
+        if self.request.data.get('token') in tokens:
+            for token in token_objects:
+                token.token_submit = True
+            return Response({'user_id': user_id}, status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class NewPasswordView(views.APIView):
+    def put(self, request, user_id):
+        token_objects = ResetPasswordData.objects.filter(user_id=user_id)
+
+        for token in token_objects:
+            if token.token_submit:
+                password = self.request.data.get('password')
+
+                profile = UserModel.objects.get(pk=user_id)
+                profile.password = make_password(password)
+                profile.save()
+
+                return Response(status=status.HTTP_200_OK)
+
+        return Response(
+            {'error_message': 'Session expired request another verification email!'},
+            status=status.HTTP_404_NOT_FOUND
+        )
