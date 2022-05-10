@@ -1,7 +1,9 @@
+
 from celery import shared_task
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.http import HttpResponse
+from django.template.loader import render_to_string
 from server import settings
 from random import choice
 from time import sleep
@@ -33,7 +35,8 @@ def send_greeting_email(email):
 @shared_task
 def handle_reset_password(email):
     symbols = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9,
+        '1', '2', '3', '4', '5',
+        '6', '7', '8', '9', '$',
         'a', 'b', 'c', 'd', 'e',
         'f', 'g', 'h', 'i', 'j',
         'k', 'l', 'm', 'n', 'o',
@@ -57,10 +60,10 @@ def handle_reset_password(email):
     token_data.save()
 
     subject = "Reset Password - DaDay"
-    msg = f"{text}"
+    html_message = render_to_string('password_reset_email.html', {'code': text})
     to = email
 
-    send_mail(subject, msg, settings.EMAIL_HOST_USER, [to])
+    send_mail(subject, '', settings.EMAIL_HOST_USER, [to], html_message=html_message)
 
 
 @shared_task

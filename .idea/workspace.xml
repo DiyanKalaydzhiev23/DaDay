@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a4517f8e-80af-4551-9df5-59afeeefd032" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/auth_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/auth_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/auth_app/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/auth_app/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/auth_app/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/auth_app/signals.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/auth_app/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/auth_app/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/auth_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/auth_app/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/auth_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/auth_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -48,6 +44,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
@@ -58,6 +55,14 @@
     "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\35988\PycharmProjects\DaDay\server\auth_app" />
+      <recent name="C:\Users\35988\PycharmProjects\DaDay" />
+      <recent name="C:\Users\35988\PycharmProjects\DaDay\server\templates" />
+      <recent name="C:\Users\35988\PycharmProjects\DaDay\server" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="server2" type="Python.DjangoServer" factoryName="Django server">
       <module name="server2" />
@@ -114,7 +119,8 @@
       <workItem from="1651583751820" duration="9845000" />
       <workItem from="1651680922674" duration="3134000" />
       <workItem from="1651944450907" duration="1003000" />
-      <workItem from="1652100143776" duration="9628000" />
+      <workItem from="1652100143776" duration="10300000" />
+      <workItem from="1652188606169" duration="3545000" />
     </task>
     <servers />
   </component>
