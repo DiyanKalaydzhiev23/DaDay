@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from server.auth_app.models import Profile, ResetPasswordData
+from server.auth_app.models import Profile
 
 
 UserModel = get_user_model()
@@ -34,7 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         profile = Profile.objects.create(
             user=user,
-            parent_email=profile_data['parent_email'],
+            email=profile_data['email'],
             avatar=profile_data['avatar'],
         )
 

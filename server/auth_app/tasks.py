@@ -15,21 +15,9 @@ UserModel = get_user_model()
 @shared_task
 def send_greeting_email(email):
     subject = "Registration greetings"
-    msg = "Hello, we are pleasured to see that you choose DaDay for personal diary for your child. " \
-          "We can ensure you that we will deliver the best possible experience for your beloved one " \
-          "and give you weekly reports on their mental health status. " \
-          "" \
-          "Regards," \
-          "AllowCookiesTeam"
+    html_message = render_to_string('greeting_email.html')
     to = email
-    res = send_mail(subject, msg, settings.EMAIL_HOST_USER, [to])
-
-    if res == 1:
-        msg = "Mail Sent Successfully."
-    else:
-        msg = "Mail Sending Failed."
-
-    return HttpResponse(msg)
+    res = send_mail(subject, '', settings.EMAIL_HOST_USER, [to], html_message=html_message)
 
 
 @shared_task

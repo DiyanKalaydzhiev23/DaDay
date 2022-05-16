@@ -8,7 +8,7 @@ const register = async (data, avatar) => {
     const reqBody = { 
         username: data.username, 
         password: data.password, 
-        profile: { parent_email: data.parentEmail, avatar: Number(avatar) }
+        profile: { email: data.parentEmail, avatar: Number(avatar) }
     };
 
     const response = await fetch(`${baseUrl}/auth/register/`, {
