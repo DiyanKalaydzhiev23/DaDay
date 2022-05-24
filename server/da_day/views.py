@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 from server.auth_app.models import Profile
 from server.auth_app.serializers import ProfileSerializer
+from server.chats_app.models import Room
 from server.common.helpers import authenticated_user
 from server.da_day.models import Note, Question
 from server.da_day.serializers import NoteSerializer
@@ -105,11 +106,18 @@ class HandleFriendRequestView(views.APIView):
         profile = Profile.objects.get(pk=user_id)
         profile_sending_request = Profile.objects.get(pk=profile_sending_request_id)
 
+        user = UserModel.objects.get(pk=user_id)
+        user_sending_request = UserModel.objects.get(pk=profile_sending_request_id)
+
         if self.request.query_params.get('accept_request'):
             if len(profile.friends) < 5000:
                 profile.pending_friend_requests.remove(profile_sending_request_id)
                 profile.friends.append(profile_sending_request_id)
                 profile_sending_request.friends.append(user_id)
+
+                room = Room()
+                room.room_name = user.username + 'AND' + user_sending_request.username
+                room.save()
             else:
                 return Response(status=status.HTTP_417_EXPECTATION_FAILED)
 
@@ -119,6 +127,9 @@ class HandleFriendRequestView(views.APIView):
         elif self.request.query_params.get('remove_friend'):
             profile.friends.remove(profile_sending_request_id)
             profile_sending_request.friends.remove(user_id)
+
+            room = Room.objects.get(room_name=user.username + 'AND' + user_sending_request.username)
+            room.delete()
 
         profile.save()
 

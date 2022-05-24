@@ -89,7 +89,7 @@ describe('Share day', () => {
         cy.get('#description-form textarea').type('test');
         cy.get('#description-form input').should('be.visible').click({force: true});
 
-        cy.get('h1').should('contain', 'Thank you for your response! I\'d be glad to chat with you tomorrow too!');
+        cy.get('h1').should('contain', 'Thank you for your response! I\'d be glad to chats_app with you tomorrow too!');
     });
 });
 
