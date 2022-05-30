@@ -41,3 +41,15 @@ Users also can send text messages. The project uses Django and React JS.</p>
 <h3>6. Run the Django development server</h3>
 
     python manage.py runserver
+    
+<h3>7. Navigate to client</h3>
+    
+    cd client
+    
+<h3>8. Install node_modules</h3>
+
+    npm install
+    
+<h3>9. Start client</h3>
+
+    npm start
