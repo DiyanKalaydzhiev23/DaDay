@@ -10,7 +10,7 @@ Users also can send text messages. The project uses Django and React JS.</p>
     
 <h3>2. Navigate to the app folder</h3>
     
-    cd simple-django-app/cool_counters
+    cd server
 
 <h3>3. Install requiremets</h3>
 
