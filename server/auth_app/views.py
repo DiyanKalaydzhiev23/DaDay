@@ -77,8 +77,8 @@ class ProfileView(views.APIView):
 
         context = {
             "is_owner": True if user_id == user_to_show_id else False,
-            "user": UserSerializer(UserModel.objects.get(pk=user_id)).data,
-            "id": user_id,
+            "user": UserSerializer(UserModel.objects.get(pk=user_to_show_id)).data,
+            "id": user_to_show_id,
         }
 
         return Response(context, status=status.HTTP_200_OK)
