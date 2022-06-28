@@ -6,7 +6,7 @@ from server.auth_app.models import Profile, ResetPasswordData
 from server.auth_app.serializers import UserSerializer
 from rest_framework.authtoken.models import Token
 from server.auth_app.tasks import handle_reset_password, delete_reset_password_token
-
+from server.common.helpers import authenticated_user
 
 UserModel = get_user_model()
 
@@ -72,9 +72,11 @@ class LoginUserView(views.APIView):
 
 
 class ProfileView(views.APIView):
-    def get(self, request, user_id):
+    def get(self, request, user_id, user_to_show_id):
+        authenticated_user(request, user_id)
+
         context = {
-            "is_owner": True if Token.objects.get(user_id=user_id) else False,
+            "is_owner": True if user_id == user_to_show_id else False,
             "user": UserSerializer(UserModel.objects.get(pk=user_id)).data,
             "id": user_id,
         }
